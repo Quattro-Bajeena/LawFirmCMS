@@ -20,5 +20,7 @@ namespace LawFirmCMS.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Specialization> Specializations { get; set; }    
+        public DbSet<CustomPage> CustomPages { get; set; }
+        public DbSet<PageElement> PageElements { get; set; }
     }
 }

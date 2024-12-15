@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LawFirmCMS Client</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LawFirmCMS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/cms.css" asp-append-version="true" />
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <a href="#" class="logo"><img src="/img/logo.gif" width="101" height="29" alt="" /></a>
+            <ul id="top-navigation">
+                <li class="active"><span><span>Homepage</span></span></li>
+                <li><span><span><a href="#">Users</a></span></span></li>
+                <li><span><span><a href="#">Orders</a></span></span></li>
+                <li><span><span><a href="#">Settings</a></span></span></li>
+                <li><span><span><a href="#">Statistics</a></span></span></li>
+                <li><span><span><a href="#">Design</a></span></span></li>
+                <li><span><span><a href="#">Contents</a></span></span></li>
+            </ul>
+        </div>
+        
+        <div id="middle">
+            <div id="left-column">
+                <h3>Header</h3>
+                <ul class="nav">
+                    <li><a href="#">Lorem Ipsum dollar</a></li>
+                    <li><a href="#">Dollar</a></li>
+                    <li><a href="#">Lorem dollar</a></li>
+                    <li><a href="#">Ipsum dollar</a></li>
+                    <li><a href="#">Lorem Ipsum dollar</a></li>
+                    <li class="last"><a href="#">Dollar Lorem Ipsum</a></li>
+                </ul>
+                <a href="#" class="link">Link here</a> <a href="#" class="link">Link here</a>
+            </div>
+            
+            <main role="main" class="pb-3">
+                <div id="center-column">
+                    <div class="top-bar">
+                        <h1>Pages</h1>
+                    </div>
+                    @RenderBody()
+                </div>
+             </main> 
+        </div>
+        <footer id="footer" class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2024 - LawFirmCMS - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

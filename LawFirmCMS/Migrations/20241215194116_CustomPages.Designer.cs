@@ -4,6 +4,7 @@ using LawFirmCMS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LawFirmCMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241215194116_CustomPages")]
+    partial class CustomPages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("Consultations", (string)null);
+                    b.ToTable("Consultations");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Conversation", b =>
@@ -70,7 +73,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Conversations", (string)null);
+                    b.ToTable("Conversations");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.CustomPage", b =>
@@ -84,12 +87,6 @@ namespace LawFirmCMS.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsGroup")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -100,9 +97,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("CustomPages", (string)null);
+                    b.ToTable("CustomPages");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Employee", b =>
@@ -137,7 +132,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.EmployeeSpecialization", b =>
@@ -160,7 +155,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("EmployeeSpecializations", (string)null);
+                    b.ToTable("EmployeeSpecializations");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.JobOffer", b =>
@@ -188,7 +183,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobOffer", (string)null);
+                    b.ToTable("JobOffer");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Message", b =>
@@ -213,7 +208,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasIndex("ConversationId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.PageElement", b =>
@@ -227,13 +222,13 @@ namespace LawFirmCMS.Migrations
                     b.Property<byte[]>("BinaryData")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int>("CustomPageId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PageId")
                         .HasColumnType("int");
 
                     b.Property<string>("TextData")
@@ -244,9 +239,9 @@ namespace LawFirmCMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PageId");
+                    b.HasIndex("CustomPageId");
 
-                    b.ToTable("PageElements", (string)null);
+                    b.ToTable("PageElements");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Post", b =>
@@ -274,7 +269,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Schedule", b =>
@@ -302,7 +297,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Schedules", (string)null);
+                    b.ToTable("Schedules");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Specialization", b =>
@@ -322,7 +317,7 @@ namespace LawFirmCMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specializations", (string)null);
+                    b.ToTable("Specializations");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Consultation", b =>
@@ -353,15 +348,6 @@ namespace LawFirmCMS.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("LawFirmCMS.Data.Models.CustomPage", b =>
-                {
-                    b.HasOne("LawFirmCMS.Data.Models.CustomPage", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.EmployeeSpecialization", b =>
@@ -396,13 +382,13 @@ namespace LawFirmCMS.Migrations
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.PageElement", b =>
                 {
-                    b.HasOne("LawFirmCMS.Data.Models.CustomPage", "Page")
+                    b.HasOne("LawFirmCMS.Data.Models.CustomPage", "CustomPage")
                         .WithMany("Elements")
-                        .HasForeignKey("PageId")
+                        .HasForeignKey("CustomPageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Page");
+                    b.Navigation("CustomPage");
                 });
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.Post", b =>
@@ -434,8 +420,6 @@ namespace LawFirmCMS.Migrations
 
             modelBuilder.Entity("LawFirmCMS.Data.Models.CustomPage", b =>
                 {
-                    b.Navigation("Children");
-
                     b.Navigation("Elements");
                 });
 

@@ -13,5 +13,8 @@ namespace LawFirmCMS.Data.Models
         public Employee Employee { get; set; }
         public int EmployeeId { get; set; }
 
+        [Required]
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

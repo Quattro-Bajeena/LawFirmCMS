@@ -18,7 +18,10 @@ namespace LawFirmCMS.Data.Models
         [Required]
         public bool Boss { get; set; }
 
-        
+        [Required]
+        public bool IsDeleted { get; set; } = false;
+
+
         public ICollection<Consultation> Consultations { get; } = new List<Consultation>();
         public ICollection<Post> Posts { get; } = new List<Post>();
         public ICollection<Schedule> Schedules { get; } = new List<Schedule>();
