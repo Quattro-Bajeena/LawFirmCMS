@@ -7,38 +7,37 @@
 <div class="table">
     <img src="/img/bg-th-left.gif" width="8" height="7" alt="" class="left" /> <img src="/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
     <table class="listing table" cellpadding="0" cellspacing="0">
-    <tr>
-        <th scope="col" class="first" width="177">Name</th>
-        <th scope="col">Path</th>
-        <th scope="col">Add subpage</th>
-        <th scope="col">Edit</th>
-        <th scope="col" class="last">Delete</th>
-    </tr>
-    @foreach(var topPage in Model.TopPages){
         <tr>
-            <td class="first style1">@topPage.Title</td>
-            <td>@topPage.Path</td>
-            <td><a asp-page="/Admin/Pages/Create" asp-route-parentId="@topPage.Id"><img src="/img/add-icon.gif" width="16" height="16" alt="add" /></a></td>
-            <td><a asp-page="/Admin/Pages/Edit"><img src="/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-            <td><a asp-page-handler="Delete" asp-route-id="@topPage.Id" ><img class="last" src="/img/hr.gif" width="16" height="16" alt="" /></a></td>
-            
+            <th scope="col" class="first" width="177">Name</th>
+            <th scope="col">Path</th>
+            <th scope="col">Add page</th>
+            <th scope="col">Edit</th>
+            <th scope="col" class="last">Delete</th>
         </tr>
+        @foreach (var topPage in Model.TopPages)
+        {
+            <tr>
+                <td class="first style1">@topPage.Title</td>
+                <td>@topPage.Path</td>
+                <td><a asp-page="./CustomPages/Create" asp-route-parentId="@topPage.Id"><img src="/img/add-icon.gif" width="16" height="16" alt="add" /></a></td>
+                <td></td>
+                <td><a asp-page-handler="Delete" asp-route-id="@topPage.Id"><img class="last" src="/img/hr.gif" width="16" height="16" alt="" /></a></td>
+            </tr>
 
-        @* @foreach(var subPage in topPage.Children){ *@
-        @*     <tr> *@
-        @*         <td class="first style2">@subPage.Title</td> *@
-        @*         <td><img src="/img/add-icon.gif" width="16" height="16" alt="" /></td> *@
-        @*             <td>@topPage.Path</td> *@
-        @*         <td></td> *@
-        @*         <td><img src="/img/edit-icon.gif" width="16" height="16" alt="" /></td> *@
-        @*             <td><img src="/img/edit-icon.gif" width="16" height="16" alt="" /></td> *@
-        @*             <td><img class="last" src="/img/hr.gif" width="16" height="16" alt="" /></td> *@
-        @*     </tr> *@
-        @* } *@
-                
-    }
+            @foreach (var subPage in topPage.Children)
+            {
+                <tr>
+                    <td class="first style2">@subPage.Title</td>
+                    <td>@subPage.Path</td>
+                    <td></td>
+                    <td><a asp-page="Admin/CustomPages/Edit"><img src="/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                    <td><a asp-page-handler="Delete" asp-route-id="@subPage.Id"><img class="last" src="/img/hr.gif" width="16" height="16" alt="" /></a></td>
+                </tr>
+            }
+
+        }
     </table>
-    <a asp-page="/Admin/Pages/Create" class="btn btn-success">Add page</a>
+    <a asp-page="/Admin/CustomPages/Create" class="btn btn-success">Add group</a>
 
 </div>
 <div class="table">

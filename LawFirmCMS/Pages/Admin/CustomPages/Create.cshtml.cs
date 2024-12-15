@@ -1,5 +1,6 @@
 using LawFirmCMS.Data;
 using LawFirmCMS.Data.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -19,10 +20,11 @@ namespace LawFirmCMS.Pages.Admin.Pages
         public void OnGet(int? parentId)
         {
             GroupPages = _context.CustomPages.Where(page => page.IsGroup).ToList();
-            if(parentId != null)
+            if (parentId != null)
             {
-                Page = new CustomPage { 
-                    ParentId = parentId ,
+                Page = new CustomPage
+                {
+                    ParentId = parentId,
                     IsGroup = false,
                 };
             }
@@ -45,15 +47,15 @@ namespace LawFirmCMS.Pages.Admin.Pages
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToPage("");
+                return Redirect(Request.GetEncodedUrl());
             }
 
             if (Page != null) _context.CustomPages.Add(Page);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Admin");
+            return RedirectToPage("/Admin/Index");
         }
 
-        
+
     }
 }

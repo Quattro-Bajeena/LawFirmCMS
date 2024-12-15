@@ -1,5 +1,4 @@
-﻿using Humanizer.Localisation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LawFirmCMS.Data.Models
 {
@@ -23,8 +22,8 @@ namespace LawFirmCMS.Data.Models
         public CustomPage? Parent { get; set; }
         public int? ParentId { get; set; }
 
-        public ICollection<PageElement> Elements { get; } = new List<PageElement>();
-        public ICollection<CustomPage> Children { get; set; } = new List<CustomPage>();
+        public virtual ICollection<PageElement> Elements { get; } = new List<PageElement>();
+        public virtual ICollection<CustomPage> Children { get; set; } = new List<CustomPage>();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -10,7 +10,7 @@ namespace LawFirmCMS.Data.Models
 
         [Required]
         public PageElementType Type { get; set; }
-        public int Order {  get; set; }
+        public int Order { get; set; }
         public string? TextData { get; set; }
         public byte[]? BinaryData { get; set; }
         [Required]
@@ -18,6 +18,6 @@ namespace LawFirmCMS.Data.Models
         public CustomPage Page { get; set; }
         public int PageId { get; set; }
 
-        
+
     }
 }
