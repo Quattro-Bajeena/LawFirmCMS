@@ -1,0 +1,62 @@
+﻿@page
+@model LawFirmCMS.Pages.Admin.JobOffers.IndexModel
+@{
+    Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Oferty pracy</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobOffer[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobOffer[0].Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobOffer[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobOffer[0].Requirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobOffer[0].IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.JobOffer) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Requirements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

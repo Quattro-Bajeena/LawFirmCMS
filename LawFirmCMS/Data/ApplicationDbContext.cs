@@ -11,16 +11,11 @@ namespace LawFirmCMS.Data
 
         }
 
-        public DbSet<Consultation> Consultations { get; set; }
-        public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmployeeSpecialization> EmployeeSpecializations { get; set; }
         public DbSet<JobOffer> JobOffer { get; set; }
-        public DbSet<Message> Messages { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Schedule> Schedules { get; set; }
-        public DbSet<Specialization> Specializations { get; set; }
-        public DbSet<CustomPage> CustomPages { get; set; }
+		public DbSet<Form> Forms { get; set; }
+		public DbSet<CustomPage> CustomPages { get; set; }
         public DbSet<PageElement> PageElements { get; set; }
     }
 }
