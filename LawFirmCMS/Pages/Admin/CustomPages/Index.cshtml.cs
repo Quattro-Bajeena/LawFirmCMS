@@ -25,6 +25,8 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
         {
             CustomPage = await _context.CustomPages
                 .Include(c => c.Parent).ToListAsync();
-        }
+
+			ViewData["CustomPages"] = CustomPage;
+		}
     }
 }

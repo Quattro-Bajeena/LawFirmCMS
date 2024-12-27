@@ -1,0 +1,14 @@
+﻿@page "/customer/pages/{slug}"
+
+@model LawFirmCMS.Pages.Customer.DynamicPageModel
+@{
+}
+
+@{
+    ViewData["Title"] = Model.PageData?.Title ?? "Page Not Found";
+}
+
+<h1>@Model.PageData.Title</h1>
+<div>
+    @Html.Raw(Model.PageData.Title) <!-- Renderowanie HTML bez kodowania -->
+</div>

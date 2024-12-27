@@ -26,7 +26,26 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.MapRazorPages();
 
+/*app.Map("/pages/{slug}", async context =>
+{
+	var slug = (string)context.Request.RouteValues["slug"];
+	var dbContext = context.RequestServices.GetRequiredService<ApplicationDbContext>();
+
+	var page = await dbContext.CustomPages.FirstOrDefaultAsync(p => p.Title == slug);
+	if (page == null)
+	{
+		context.Response.StatusCode = 404;
+		await context.Response.WriteAsync("Page not found");
+		return;
+	}
+
+	context.Response.ContentType = "text/html";
+	//await context.Response.WriteAsync($"<html><body><h1>{page.Title}</h1><p>{page.Content}</p></body></html>");
+	await context.Response.WriteAsync($"<html><body><h1>{page.Title}</h1></body></html>");
+
+});*/
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
