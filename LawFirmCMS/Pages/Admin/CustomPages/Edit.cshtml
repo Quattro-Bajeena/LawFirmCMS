@@ -1,13 +1,13 @@
 ﻿@page
-@model LawFirmCMS.Pages.Admin.CustomPages.CreateModel
+@model LawFirmCMS.Pages.Admin.CustomPages.EditModel
 @{
     Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
 }
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>CustomPage</h4>
 <hr />
@@ -15,6 +15,7 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CustomPage.Id" />
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="CustomPage.Title" class="control-label"></label>
@@ -41,17 +42,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="CustomPage.ParentId" class="control-label"></label>
-                <select asp-for="CustomPage.ParentId" class ="form-control" asp-items="ViewBag.ParentId"></select>
+                <select asp-for="CustomPage.ParentId" class="form-control" asp-items="ViewBag.ParentId"></select>
+                <span asp-validation-for="CustomPage.ParentId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {

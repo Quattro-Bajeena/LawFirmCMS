@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using LawFirmCMS.Data;
 using LawFirmCMS.Data.Models;
 
-namespace LawFirmCMS.Pages.Admin.CustomPages
+namespace LawFirmCMS.Pages.Admin.PageElements
 {
     public class CreateModel : PageModel
     {
@@ -21,13 +21,14 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
 
         public IActionResult OnGet()
         {
-        ViewData["ParentId"] = new SelectList(_context.CustomPages, "Id", "Path");
+        ViewData["PageId"] = new SelectList(_context.CustomPages, "Id", "Path");
             return Page();
         }
 
         [BindProperty]
-        public CustomPage CustomPage { get; set; } = default!;
+        public PageElement PageElement { get; set; } = default!;
 
+        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,10 +36,7 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
                 return Page();
             }
 
-            if (CustomPage.IsGroup == false)
-                CustomPage.ParentId = null;
-
-            _context.CustomPages.Add(CustomPage);
+            _context.PageElements.Add(PageElement);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

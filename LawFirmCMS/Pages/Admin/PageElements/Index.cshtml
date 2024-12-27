@@ -1,0 +1,68 @@
+﻿@page
+@model LawFirmCMS.Pages.Admin.PageElements.IndexModel
+@{
+    Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElement[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElement[0].Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElement[0].TextData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElement[0].BinaryData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElement[0].IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElement[0].Page)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PageElement) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TextData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BinaryData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Page.Path)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
