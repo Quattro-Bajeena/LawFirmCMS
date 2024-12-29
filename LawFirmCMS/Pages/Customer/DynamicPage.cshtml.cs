@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using LawFirmCMS.Data;
 using LawFirmCMS.Data.Models;
 using System.Threading.Tasks;
+using LawFirmCMS.Data.Enums;
+using System.Net;
 
 namespace LawFirmCMS.Pages.Customer
 
@@ -18,14 +20,20 @@ namespace LawFirmCMS.Pages.Customer
 		}
 
 		public CustomPage PageData { get; set; }
+		public List<PageElement> PageElements { get; set; }
+		public List<string> FinalHTML { get; set; } = new List<string>();
+
 
 		public async Task<IActionResult> OnGetAsync(string slug)
 		{
-			// Pobierz stronê z bazy danych na podstawie slug
 			PageData = await _context.CustomPages
-				.FirstOrDefaultAsync(p => p.Title == slug);
+				.FirstOrDefaultAsync(p => p.Title == slug && !p.IsDeleted);
 
-			// Jeœli nie znaleziono strony, zwróæ 404
+			PageElements = await _context.PageElements
+				.Where(pe => pe.PageId == PageData.Id && !pe.IsDeleted) 
+				.OrderBy(pe => pe.Order)                              
+				.ToListAsync();
+
 			if (PageData == null)
 			{
 				return NotFound();
@@ -33,5 +41,7 @@ namespace LawFirmCMS.Pages.Customer
 
 			return Page();
 		}
+
+
 	}
 }

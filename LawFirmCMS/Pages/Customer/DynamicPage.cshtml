@@ -1,14 +1,41 @@
-﻿@page "/customer/pages/{slug}"
-
+﻿@page "/customer/{slug}"
 @model LawFirmCMS.Pages.Customer.DynamicPageModel
-@{
-}
 
 @{
     ViewData["Title"] = Model.PageData?.Title ?? "Page Not Found";
 }
 
 <h1>@Model.PageData.Title</h1>
-<div>
-    @Html.Raw(Model.PageData.Title) <!-- Renderowanie HTML bez kodowania -->
-</div>
+
+@foreach (var element in Model.PageElements)
+{
+    <div class="page-element">
+        @switch (element.Type)
+        {
+            case LawFirmCMS.Data.Enums.PageElementType.Heading:
+                <H1>@Html.Raw(element.TextData)</H1>
+                break;
+
+            case LawFirmCMS.Data.Enums.PageElementType.Image:
+                var mimeType = "application/octet-stream";
+                if (element.BinaryData[0] == 0xFF && element.BinaryData[1] == 0xD8) mimeType = "image/jpeg";
+                if (element.BinaryData[0] == 0x89 && element.BinaryData[1] == 0x50) mimeType = "image/png";
+                if (element.BinaryData[0] == 0x47 && element.BinaryData[1] == 0x49) mimeType = "image/gif";
+                if (element.BinaryData[0] == 0x42 && element.BinaryData[1] == 0x4D) mimeType = "image/bmp"; ;
+                <img src="data:@mimeType;base64,@Convert.ToBase64String(element.BinaryData)" alt="Image" />
+                break;
+
+            case LawFirmCMS.Data.Enums.PageElementType.RichText:
+                <div>@Html.Raw(element.TextData)</div>
+                break;
+
+            case LawFirmCMS.Data.Enums.PageElementType.Employee:
+                <button class="btn btn-primary">@element.TextData</button>
+                break;
+
+            default:
+                <p>[Unsupported Element]</p>
+                break;
+        }
+    </div>
+}

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LawFirmCMS.Data.Models
 {
@@ -10,7 +11,8 @@ namespace LawFirmCMS.Data.Models
         public string Content { get; set; }
         [Required]
         public DateTime PublishDate { get; set; }
-        public Employee Employee { get; set; }
+        [ForeignKey("EmployeeId")]
+        public Employee? Employee { get; set; }
         public int EmployeeId { get; set; }
 
         [Required]
