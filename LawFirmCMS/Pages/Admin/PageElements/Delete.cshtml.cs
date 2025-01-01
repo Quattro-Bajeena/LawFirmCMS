@@ -57,7 +57,7 @@ namespace LawFirmCMS.Pages.Admin.PageElements
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
-        }
+			return RedirectToPage("ElementsListPerPage", new { id = PageElement.PageId });
+		}
     }
 }

@@ -1,0 +1,87 @@
+﻿@page
+@model LawFirmCMS.Pages.Admin.PageElements.ElementsListPerPageModel
+@{
+    Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of elements for @Model.PageName page:</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElements[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElements[0].Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElements[0].TextData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElements[0].BinaryData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElements[0].IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageElements[0].Page)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PageElements)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order)
+                </td>
+                <td>
+                    @Html.Raw(item.TextData)
+                </td>
+                <td >
+                    @if (item.BinaryData != null)
+                    {
+                    <button id="openPopupBtn">Pokaż obraz</button>
+                    <div id="popupContainer" class="popup-container">
+                        <span id="closePopupBtn" class="close-btn">&times;</span>
+                        @{
+                        var mimeType = "application/octet-stream";
+                        if (item.BinaryData[0] == 0xFF && item.BinaryData[1] == 0xD8) mimeType = "image/jpeg";
+                        if (item.BinaryData[0] == 0x89 && item.BinaryData[1] == 0x50) mimeType = "image/png";
+                        if (item.BinaryData[0] == 0x47 && item.BinaryData[1] == 0x49) mimeType = "image/gif";
+                        if (item.BinaryData[0] == 0x42 && item.BinaryData[1] == 0x4D) mimeType = "image/bmp"; 
+                    }
+                        <img src="data:@mimeType;base64,@Convert.ToBase64String(item.BinaryData)" alt="Image" />
+                    </div>
+                    }
+                    else {
+                        <p>No binary data</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Page.Path)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        <script src="site.js"></script>
+    </tbody>
+</table>
