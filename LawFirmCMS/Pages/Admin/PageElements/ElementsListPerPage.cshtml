@@ -52,20 +52,28 @@
                 <td >
                     @if (item.BinaryData != null)
                     {
-                    <button id="openPopupBtn">Pokaż obraz</button>
-                    <div id="popupContainer" class="popup-container">
-                        <span id="closePopupBtn" class="close-btn">&times;</span>
-                        @{
-                        var mimeType = "application/octet-stream";
-                        if (item.BinaryData[0] == 0xFF && item.BinaryData[1] == 0xD8) mimeType = "image/jpeg";
-                        if (item.BinaryData[0] == 0x89 && item.BinaryData[1] == 0x50) mimeType = "image/png";
-                        if (item.BinaryData[0] == 0x47 && item.BinaryData[1] == 0x49) mimeType = "image/gif";
-                        if (item.BinaryData[0] == 0x42 && item.BinaryData[1] == 0x4D) mimeType = "image/bmp"; 
+                        var popupId = $"popupContainer_{item.Id}";
+                        var buttonId = $"openPopupBtn_{item.Id}";
+                        var closeButtonId = $"closePopupBtn_{item.Id}";
+
+                        <button id="@buttonId">Pokaż obraz</button>
+
+                        <div id="@popupId" class="popup-container" style="display:none;">
+                            <span id="@closeButtonId" class="close-btn">&times;</span>
+
+                            @{
+                                var mimeType = "application/octet-stream";
+                                if (item.BinaryData[0] == 0xFF && item.BinaryData[1] == 0xD8) mimeType = "image/jpeg";
+                                if (item.BinaryData[0] == 0x89 && item.BinaryData[1] == 0x50) mimeType = "image/png";
+                                if (item.BinaryData[0] == 0x47 && item.BinaryData[1] == 0x49) mimeType = "image/gif";
+                                if (item.BinaryData[0] == 0x42 && item.BinaryData[1] == 0x4D) mimeType = "image/bmp";
+                            }
+
+                            <img src="data:@mimeType;base64,@Convert.ToBase64String(item.BinaryData)" alt="Image" class="popup-image" />
+                        </div>
                     }
-                        <img src="data:@mimeType;base64,@Convert.ToBase64String(item.BinaryData)" alt="Image" />
-                    </div>
-                    }
-                    else {
+                    else
+                    {
                         <p>No binary data</p>
                     }
                 </td>

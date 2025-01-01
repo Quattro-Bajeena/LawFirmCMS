@@ -13,20 +13,30 @@ tabItems.forEach(function (item) {
     });
 });
 
-const openPopupBtn = document.getElementById('openPopupBtn');
-const popupContainer = document.getElementById('popupContainer');
-const closePopupBtn = document.getElementById('closePopupBtn');
+document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll("[id^='openPopupBtn_']");
+    const closeButtons = document.querySelectorAll("[id^='closePopupBtn_']");
+    const popups = document.querySelectorAll("[id^='popupContainer_']");
 
-openPopupBtn.addEventListener('click', () => {
-    popupContainer.style.display = 'flex';
-});
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const popupId = button.id.replace("openPopupBtn_", "popupContainer_");
+            document.getElementById(popupId).style.display = "flex";
+        });
+    });
 
-closePopupBtn.addEventListener('click', () => {
-    popupContainer.style.display = 'none';
-});
+    closeButtons.forEach(closeButton => {
+        closeButton.addEventListener("click", () => {
+            const popupId = closeButton.id.replace("closePopupBtn_", "popupContainer_");
+            document.getElementById(popupId).style.display = "none";
+        });
+    });
 
-popupContainer.addEventListener('click', (e) => {
-    if (e.target === popupContainer) {
-        popupContainer.style.display = 'none';
-    }
+    popups.forEach(popup => {
+        popup.addEventListener("click", (e) => {
+            if (e.target === popup) {
+                popup.style.display = "none";
+            }
+        });
+    });
 });

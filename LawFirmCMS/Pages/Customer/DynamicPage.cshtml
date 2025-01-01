@@ -5,37 +5,42 @@
     ViewData["Title"] = Model.PageData?.Title ?? "Page Not Found";
 }
 
-<h1>@Model.PageData.Title</h1>
+<div class="page-elements-container page-element">
+    @foreach (var element in Model.PageElements)
+    {
+        <div >
+            @switch (element.Type)
+            {
+                case LawFirmCMS.Data.Enums.PageElementType.Heading:
+                    <h1 class="element-heading">@Html.Raw(element.TextData)</h1>
+                    break;
 
-@foreach (var element in Model.PageElements)
-{
-    <div class="page-element">
-        @switch (element.Type)
-        {
-            case LawFirmCMS.Data.Enums.PageElementType.Heading:
-                <H1>@Html.Raw(element.TextData)</H1>
-                break;
+                case LawFirmCMS.Data.Enums.PageElementType.Image:
+                    var mimeType = "application/octet-stream";
+                    if (element.BinaryData[0] == 0xFF && element.BinaryData[1] == 0xD8) mimeType = "image/jpeg";
+                    if (element.BinaryData[0] == 0x89 && element.BinaryData[1] == 0x50) mimeType = "image/png";
+                    if (element.BinaryData[0] == 0x47 && element.BinaryData[1] == 0x49) mimeType = "image/gif";
+                    if (element.BinaryData[0] == 0x42 && element.BinaryData[1] == 0x4D) mimeType = "image/bmp";
 
-            case LawFirmCMS.Data.Enums.PageElementType.Image:
-                var mimeType = "application/octet-stream";
-                if (element.BinaryData[0] == 0xFF && element.BinaryData[1] == 0xD8) mimeType = "image/jpeg";
-                if (element.BinaryData[0] == 0x89 && element.BinaryData[1] == 0x50) mimeType = "image/png";
-                if (element.BinaryData[0] == 0x47 && element.BinaryData[1] == 0x49) mimeType = "image/gif";
-                if (element.BinaryData[0] == 0x42 && element.BinaryData[1] == 0x4D) mimeType = "image/bmp"; ;
-                <img src="data:@mimeType;base64,@Convert.ToBase64String(element.BinaryData)" alt="Image" />
-                break;
+                    <div class="element-image-container">
+                        <img src="data:@mimeType;base64,@Convert.ToBase64String(element.BinaryData)" alt="Image" class="element-image" />
+                    </div>
+                    break;
 
-            case LawFirmCMS.Data.Enums.PageElementType.RichText:
-                <div>@Html.Raw(element.TextData)</div>
-                break;
+                case LawFirmCMS.Data.Enums.PageElementType.RichText:
+                    <div class="element-richtext">@Html.Raw(element.TextData)</div>
+                    break;
 
-            case LawFirmCMS.Data.Enums.PageElementType.Employee:
-                <button class="btn btn-primary">@element.TextData</button>
-                break;
+                case LawFirmCMS.Data.Enums.PageElementType.Employee:
+                    <div class="element-employee">
+                        <button class="btn btn-primary element-button">@element.TextData</button>
+                    </div>
+                    break;
 
-            default:
-                <p>[Unsupported Element]</p>
-                break;
-        }
-    </div>
-}
+                default:
+                    <p class="element-unsupported">[Unsupported Element]</p>
+                    break;
+            }
+        </div>
+    }
+</div>
