@@ -30,3 +30,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+function toggleContent(elementId, btn) {
+    const element = document.getElementById(elementId);
+
+    if (element.classList.contains('text-truncate')) {
+        element.classList.remove('text-truncate'); 
+        btn.textContent = "Show Less";
+    } else {
+        element.classList.add('text-truncate'); 
+        btn.textContent = "Read More";
+    }
+}

@@ -1,0 +1,40 @@
+﻿@page
+@model LawFirmCMS.Pages.Admin.Posts.IndexModelFront
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Publications";
+}
+
+<h1 class="my-4 text-center text-gold">Publications</h1>
+<p class="text-muted text-center mb-5">Explore our latest articles and insights from our experienced lawyers.</p>
+
+<div class="container mb-5">
+    <div class="row g-4">
+        @foreach (var item in Model.Post)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="card-title mb-0">
+                            By @Html.DisplayFor(modelItem => item.Employee.Name) @Html.DisplayFor(modelItem => item.Employee.Surname)
+                        </h5>
+                        <small class="text-muted">Published on @Html.DisplayFor(modelItem => item.PublishDate)</small>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-text text-truncate" id="content-@item.Id">
+                                @Html.Raw(item.Content)
+
+                        </div>
+                        <a href="#" class="btn btn-link p-0 text-gold" onclick="toggleContent('content-@item.Id', this); return false;">Read More</a>
+                    </div>
+
+                    <div class="card-footer text-end">
+
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Go to Post</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

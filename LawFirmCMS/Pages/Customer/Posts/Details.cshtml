@@ -1,0 +1,28 @@
+﻿@page
+@model LawFirmCMS.Pages.Admin.Posts.DetailsModelFront
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Publications";
+}
+
+<div class="container py-5">
+    <h1 class="text-gold mb-4 text-center">Publication Details</h1>
+
+    <p class="text-muted text-center mb-4">
+        By <strong>@Model.Post.Employee.Name @Model.Post.Employee.Surname</strong>
+        on <em>@Model.Post.PublishDate.ToString("dd.MM.yyyy HH:mm:ss")</em>
+    </p>
+
+    <hr />
+
+    <div class="post-content py-4 px-3 border rounded shadow-sm bg-light">
+        <p>@Html.Raw(Model.Post.Content)</p>
+    </div>
+
+    <hr />
+
+    <div class="text-center mt-4">
+        <a asp-page="Index" class="btn btn-outline-secondary">Back to Publications</a>
+    </div>
+</div>
+

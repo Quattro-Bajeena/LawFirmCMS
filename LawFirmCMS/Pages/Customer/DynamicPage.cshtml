@@ -1,6 +1,8 @@
 ﻿@page "/customer/{slug}"
 @model LawFirmCMS.Pages.Customer.DynamicPageModel
-
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
 @{
     ViewData["Title"] = Model.PageData?.Title ?? "Page Not Found";
 }
