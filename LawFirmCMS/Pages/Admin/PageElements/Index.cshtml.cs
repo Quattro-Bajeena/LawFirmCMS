@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.PageElements
 {
@@ -19,11 +13,11 @@ namespace LawFirmCMS.Pages.Admin.PageElements
             _context = context;
         }
 
-        public IList<PageElement> PageElement { get;set; } = default!;
+        public IList<PageElement> PageElement { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            PageElement = await _context.PageElements
+            PageElement = await _context.PageElements.OrderBy(pe => pe.Order)
                 .Include(p => p.Page).ToListAsync();
         }
     }

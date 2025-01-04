@@ -5,6 +5,7 @@
 }
 @{
     ViewData["Title"] = "Create";
+    ViewData["NavigationPages"] = "active";
 }
 
 <h1>Create</h1>
@@ -30,18 +31,14 @@
             <div class="form-group form-check">
                 <span class="text-danger">*</span>
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CustomPage.IsGroup" /> @Html.DisplayNameFor(model => model.CustomPage.IsGroup)
+                    <input id="isgroup-input" class="form-check-input" asp-for="CustomPage.IsGroup" /> @Html.DisplayNameFor(model => model.CustomPage.IsGroup)
                 </label>
             </div>
-            <div class="form-group form-check">
-                <span class="text-danger">*</span>
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CustomPage.IsDeleted" /> @Html.DisplayNameFor(model => model.CustomPage.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
+            <div id="parent-form" class="form-group">
                 <label asp-for="CustomPage.ParentId" class="control-label"></label>
-                <select asp-for="CustomPage.ParentId" class ="form-control" asp-items="ViewBag.ParentId"></select>
+                <select asp-for="CustomPage.ParentId" class ="form-control" asp-items="ViewBag.ParentId">
+                    <option value="">None</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -55,5 +52,27 @@
 </div>
 
 @section Scripts {
+    <script>
+        const checkbox = document.getElementById('isgroup-input');
+        const parentForm = document.getElementById('parent-form');
+
+        if (checkbox && parentForm) {
+          // Add event listener to the checkbox
+          checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+              parentForm.style.display = 'none'; // Hide the div
+            } else {
+              parentForm.style.display = 'block'; // Show the div
+            }
+          });
+
+          // Set initial visibility based on checkbox state
+          if (checkbox.checked) {
+            parentForm.style.display = 'none';
+          } else {
+            parentForm.style.display = 'block';
+          }
+        }
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

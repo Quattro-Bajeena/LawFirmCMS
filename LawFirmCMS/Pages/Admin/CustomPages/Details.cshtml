@@ -5,6 +5,7 @@
 }
 @{
     ViewData["Title"] = "Details";
+    ViewData["NavigationPages"] = "active";
 }
 
 <h1>Details</h1>
@@ -41,7 +42,7 @@
             @Html.DisplayNameFor(model => model.CustomPage.Parent)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CustomPage.Parent.Path)
+            @Html.DisplayFor(model => model.CustomPage.Parent.Title)
         </dd>
     </dl>
 </div>

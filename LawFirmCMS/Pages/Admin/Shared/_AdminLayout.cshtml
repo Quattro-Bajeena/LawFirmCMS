@@ -1,62 +1,60 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LawFirmCMS Client</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/LawFirmCMS.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="/css/cms.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Mateusz Oleszek, Patrycja Przybylska">
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-</head>
-<body>
-    <div id="main">
-        <div id="header">
-            <a href="#" class="logo"><img src="/img/logo.gif" width="101" height="29" alt="" /></a>
-            <ul id="top-navigation">
-                <li class="tab-item active"><span><span><a asp-page="/Admin/CustomPages/Index">Pages</a></span></span></li>
-                <li class="tab-item"><span><span><a asp-page="/Admin/Employees/Index">Employees</a></span></span></li>
-                <li class="tab-item"><span><span><a asp-page="/Admin/JobOffers/Index">Job offers</a></span></span></li>
-                <li class="tab-item"><span><span><a asp-page="/Admin/Forms/Index">Forms</a></span></span></li>
-                <li class="tab-item"><span><span><a asp-page="/Admin/Posts/Index">Posts</a></span></span></li>
-            </ul>
-        </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
         
-        <div id="middle">
-            <div id="left-column">
-                <h3>Header</h3>
-                <ul class="nav">
-                    <li><a href="#">Lorem Ipsum dollar</a></li>
-                    <li><a href="#">Dollar</a></li>
-                    <li><a href="#">Lorem dollar</a></li>
-                    <li><a href="#">Ipsum dollar</a></li>
-                    <li><a href="#">Lorem Ipsum dollar</a></li>
-                    <li class="last"><a href="#">Dollar Lorem Ipsum</a></li>
-                </ul>
-                <a href="#" class="link">Link here</a> <a href="#" class="link">Link here</a>
-            </div>
-            
-            <main role="main" class="pb-3">
-                <div id="center-column">
-                    <div class="top-bar">
-                    </div>
-                    @RenderBody()
-                </div>
-             </main> 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/LawFirmCMS.styles.css" asp-append-version="true" />
+
+    <title>@ViewData["Title"] - LawFirmCMS Client</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" asp-page="/Index">Public</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link @ViewData["NavigationPages"]" asp-page="/Admin/CustomPages/Index">Pages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @ViewData["NavigationEmployees"]" asp-page="/Admin/Employees/Index">Employees</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @ViewData["NavigationJobOffers"]" asp-page="/Admin/JobOffers/Index">Job Offers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @ViewData["NavigationForms"]" asp-page="/Admin/Forms/Index">Forms</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @ViewData["NavigationPosts"]" asp-page="/Admin/Posts/Index">Posts</a>
+            </li>
+          </ul>
         </div>
-        <footer id="footer" class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2024 - LawFirmCMS - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-        </footer>
-    </div>
+      </div>
+    </nav>
 
+    <main class="container">
+      <div class="bg-body-tertiary">
+        @RenderBody()
+      </div>
+    </main>
 
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

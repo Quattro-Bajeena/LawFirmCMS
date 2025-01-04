@@ -11,15 +11,18 @@ namespace LawFirmCMS.Data.Models
         public string Title { get; set; }
 
         [Required]
-        [RegularExpression(@"^[^\s]*$")]
+        [RegularExpression(@"^[^\s]*$", ErrorMessage = "Path can't have spaces")]
         public string Path { get; set; }
 
         [Required]
+        [Display(Name = "Page group")]
         public bool IsGroup { get; set; } = false;
 
         [Required]
+        [Display(Name = "Deleted")]
         public bool IsDeleted { get; set; } = false;
-        public CustomPage? Parent { get; set; }
+        public virtual CustomPage? Parent { get; set; }
+        [Display(Name = "Parent page")]
         public int? ParentId { get; set; }
 
         public virtual ICollection<PageElement> Elements { get; } = new List<PageElement>();

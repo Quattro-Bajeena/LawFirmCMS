@@ -12,10 +12,12 @@ namespace LawFirmCMS.Data.Models
         [Required]
         public DateTime PublishDate { get; set; }
         [ForeignKey("EmployeeId")]
-        public Employee? Employee { get; set; }
+        public virtual Employee? Employee { get; set; }
+        [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
 
         [Required]
+        [Display(Name = "Deleted")]
         public bool IsDeleted { get; set; } = false;
 
     }

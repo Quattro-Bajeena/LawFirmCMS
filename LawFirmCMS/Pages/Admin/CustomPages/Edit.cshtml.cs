@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.CustomPages
 {
@@ -30,13 +25,13 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
                 return NotFound();
             }
 
-            var custompage =  await _context.CustomPages.FirstOrDefaultAsync(m => m.Id == id);
+            var custompage = await _context.CustomPages.FirstOrDefaultAsync(m => m.Id == id);
             if (custompage == null)
             {
                 return NotFound();
             }
             CustomPage = custompage;
-           ViewData["ParentId"] = new SelectList(_context.CustomPages, "Id", "Path");
+            ViewData["ParentId"] = new SelectList(_context.CustomPages.Where(p => p.IsGroup), "Id", "Title");
             return Page();
         }
 

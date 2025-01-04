@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.CustomPages
 {
@@ -21,12 +16,16 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
 
         public IActionResult OnGet()
         {
-        ViewData["ParentId"] = new SelectList(_context.CustomPages, "Id", "Path");
+            GroupPages = _context.CustomPages.Where(page => page.IsGroup).ToList();
+
+            ViewData["ParentId"] = new SelectList(GroupPages, "Id", "Title");
             return Page();
         }
 
         [BindProperty]
         public CustomPage CustomPage { get; set; } = default!;
+
+        public IEnumerable<CustomPage> GroupPages { get; set; } = new List<CustomPage>();
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -35,7 +34,7 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
                 return Page();
             }
 
-            if (CustomPage.IsGroup == false)
+            if (CustomPage.IsGroup == true)
                 CustomPage.ParentId = null;
 
             _context.CustomPages.Add(CustomPage);

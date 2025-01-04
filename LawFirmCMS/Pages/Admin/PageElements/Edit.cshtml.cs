@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Enums;
+using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
-using LawFirmCMS.Data.Enums;
 
 namespace LawFirmCMS.Pages.Admin.PageElements
 {
@@ -31,66 +26,68 @@ namespace LawFirmCMS.Pages.Admin.PageElements
                 return NotFound();
             }
 
-            var pageelement =  await _context.PageElements.FirstOrDefaultAsync(m => m.Id == id);
-            if (pageelement == null)
+            var pageElement = await _context.PageElements.FirstOrDefaultAsync(m => m.Id == id);
+            if (pageElement == null)
             {
                 return NotFound();
             }
-            PageElement = pageelement;
-			ViewData["PageId"] = new SelectList(_context.CustomPages, "Id", "Title");
-			ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)));
-			return Page();
-		}
+            PageElement = pageElement;
+            ViewData["PageId"] = new SelectList(_context.CustomPages.Where(page => page.Id == pageElement.PageId), "Id", "Title", pageElement.PageId);
+            ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)));
+            ViewData["Employees"] = new SelectList(_context.Employees, "Id", "Login");
+
+            return Page();
+        }
 
 
-		public async Task<IActionResult> OnPostAsync()
-		{
+        public async Task<IActionResult> OnPostAsync()
+        {
 
-			PageElement.Page = _context.CustomPages.Where(p => p.Id == PageElement.PageId).First();
+            PageElement.Page = _context.CustomPages.Where(p => p.Id == PageElement.PageId).First();
 
-			if (!ModelState.IsValid)
-			{
-				foreach (var state in ModelState)
-				{
-					Console.WriteLine($"Key: {state.Key}, value: {state.Value.ToString()}");
+            if (!ModelState.IsValid)
+            {
+                foreach (var state in ModelState)
+                {
+                    Console.WriteLine($"Key: {state.Key}, value: {state.Value.ToString()}");
 
-					foreach (var error in state.Value.Errors)
-					{
-						Console.WriteLine($"Error: {error.ErrorMessage}");
-					}
-				}
-				ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)));
-				ViewData["PageId"] = new SelectList(_context.CustomPages, "Id", "Title");
-				return Page();
-			}
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Console.WriteLine($"Error: {error.ErrorMessage}");
+                    }
+                }
+                ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)));
+                ViewData["PageId"] = new SelectList(_context.CustomPages, "Id", "Title");
+                return Page();
+            }
 
-			var file = Request.Form.Files["fileInput"];
-			if (file != null && file.Length > 0)
-			{
-				var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-				var extension = Path.GetExtension(file.FileName).ToLower();
+            var file = Request.Form.Files["fileInput"];
+            if (file != null && file.Length > 0)
+            {
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                var extension = Path.GetExtension(file.FileName).ToLower();
 
-				if (!allowedExtensions.Contains(extension))
-				{
-					ModelState.AddModelError("File", "Only image files (.jpg, .jpeg, .png, .gif) are allowed.");
-				}
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ModelState.AddModelError("File", "Only image files (.jpg, .jpeg, .png, .gif) are allowed.");
+                }
 
-				if (file.Length > 5 * 1024 * 1024) // 5 MB limit
-				{
-					ModelState.AddModelError("File", "File size must be less than 5 MB.");
-				}
+                if (file.Length > 5 * 1024 * 1024) // 5 MB limit
+                {
+                    ModelState.AddModelError("File", "File size must be less than 5 MB.");
+                }
 
-				using var memoryStream = new MemoryStream();
-				await file.CopyToAsync(memoryStream);
-				PageElement.BinaryData = memoryStream.ToArray();
-			}
+                using var memoryStream = new MemoryStream();
+                await file.CopyToAsync(memoryStream);
+                PageElement.BinaryData = memoryStream.ToArray();
+            }
 
-			if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(PageElement).State = EntityState.Modified;
+            _context.Update(PageElement);
 
             try
             {
@@ -108,8 +105,8 @@ namespace LawFirmCMS.Pages.Admin.PageElements
                 }
             }
 
-			return RedirectToPage("ElementsListPerPage", new { id = PageElement.PageId });
-		}
+            return RedirectToPage("ElementsListPerPage", new { id = PageElement.PageId });
+        }
 
         private bool PageElementExists(int id)
         {

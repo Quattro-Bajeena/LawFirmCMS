@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.Employees
 {
@@ -19,11 +13,11 @@ namespace LawFirmCMS.Pages.Admin.Employees
             _context = context;
         }
 
-        public IList<Employee> Employee { get;set; } = default!;
+        public IList<Employee> Employee { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Employee = await _context.Employees.ToListAsync();
+            Employee = await _context.Employees.Where(e => !e.IsDeleted).ToListAsync();
         }
     }
 }

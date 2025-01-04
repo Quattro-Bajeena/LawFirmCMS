@@ -18,6 +18,7 @@ namespace LawFirmCMS.Data.Models
         public bool Boss { get; set; }
 
         [Required]
+        [Display(Name = "Deleted")]
         public bool IsDeleted { get; set; } = false;
 
 

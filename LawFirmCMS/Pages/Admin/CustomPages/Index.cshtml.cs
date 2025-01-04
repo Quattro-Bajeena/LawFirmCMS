@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.CustomPages
 {
@@ -18,15 +12,13 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
         {
             _context = context;
         }
-
-        public IList<CustomPage> CustomPage { get;set; } = default!;
+        public IList<CustomPage> ParentlessPages { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            CustomPage = await _context.CustomPages
-                .Include(c => c.Parent).ToListAsync();
-
-			ViewData["CustomPages"] = CustomPage;
-		}
+            ParentlessPages = await _context.CustomPages
+                .Where(c => !c.IsDeleted && c.ParentId == null)
+                .ToListAsync();
+        }
     }
 }

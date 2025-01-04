@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.CustomPages
 {
@@ -53,7 +48,8 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
             if (custompage != null)
             {
                 CustomPage = custompage;
-                _context.CustomPages.Remove(CustomPage);
+                custompage.IsDeleted = true;
+                _context.Update(CustomPage);
                 await _context.SaveChangesAsync();
             }
 

@@ -5,11 +5,12 @@
 }
 @{
     ViewData["Title"] = "Create";
+    ViewData["NavigationJobOffers"] = "active";
 }
 
 <h1>Create</h1>
 
-<h4>JobOffer</h4>
+<h4>Job Offer</h4>
 <hr />
 <div class="row">
     <div >
@@ -38,12 +39,6 @@
                 <label asp-for="JobOffer.Requirements" class="control-label"></label>
                 <input asp-for="JobOffer.Requirements" class="form-control" />
                 <span asp-validation-for="JobOffer.Requirements" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <span class="text-danger">*</span>
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="JobOffer.IsDeleted" /> @Html.DisplayNameFor(model => model.JobOffer.IsDeleted)
-                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.Employees
 {
@@ -53,7 +48,8 @@ namespace LawFirmCMS.Pages.Admin.Employees
             if (employee != null)
             {
                 Employee = employee;
-                _context.Employees.Remove(Employee);
+                Employee.IsDeleted = true;
+                _context.Update(Employee);
                 await _context.SaveChangesAsync();
             }
 

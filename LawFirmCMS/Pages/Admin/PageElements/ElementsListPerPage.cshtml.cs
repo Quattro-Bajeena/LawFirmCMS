@@ -1,41 +1,71 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.PageElements
 {
-	public class ElementsListPerPageModel : PageModel
-	{
-		private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+    public class ElementsListPerPageModel : PageModel
+    {
+        private readonly LawFirmCMS.Data.ApplicationDbContext _context;
 
-		public ElementsListPerPageModel(LawFirmCMS.Data.ApplicationDbContext context)
-		{
-			_context = context;
-		}
+        public ElementsListPerPageModel(LawFirmCMS.Data.ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-		[BindProperty]
-		public List<PageElement> PageElements { get; set; } = default!;
-		public string PageName { get; set; }
+        [BindProperty]
+        public List<PageElement> PageElements { get; set; } = default!;
+        public string PageName { get; set; }
+        public int Id { get; set; }
 
-		public async Task<IActionResult> OnGetAsync(int? id)
-		{
-			if (id == null)
-			{
-				Console.WriteLine("Null");
-				return NotFound();
-			}
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id == null)
+            {
+                Console.WriteLine("Null");
+                return NotFound();
+            }
+            Id = (int)id;
+            PageName = await _context.CustomPages.Where(m => m.Id == id).Select(m => m.Title).FirstOrDefaultAsync();
+            PageElements = await _context.PageElements.Where(m => m.PageId == id && !m.IsDeleted).ToListAsync();
 
-			PageName = await _context.CustomPages.Where(m => m.Id == id).Select(m => m.Title).FirstOrDefaultAsync();
-			PageElements = await _context.PageElements.Where(m => m.PageId == id).ToListAsync();
+            return Page();
+        }
 
-			return Page();
-		}
-	}
+        // TODO to musi być wywołane jako POST
+        public async Task<IActionResult> OnGetChangeOrder(int page, int id, string direction)
+        {
+            var element = _context.PageElements.FirstOrDefault(pe => pe.Id == id);
+            if (element != null)
+            {
+                PageElement? otherElement = null;
+                if (direction == "up")
+                {
+                    otherElement = _context.PageElements
+                        .Where(pe => pe.PageId == page && !pe.IsDeleted && pe.Order < element.Order)
+                        .OrderByDescending(pe => pe.Order)
+                        .FirstOrDefault();
+
+                }
+                else if (direction == "down")
+                {
+                    otherElement = _context.PageElements
+                        .Where(pe => pe.PageId == page && !pe.IsDeleted && pe.Order > element.Order)
+                        .OrderBy(pe => pe.Order)
+                        .FirstOrDefault();
+                }
+
+                if (otherElement != null)
+                {
+                    (otherElement.Order, element.Order) = (element.Order, otherElement.Order);
+                    _context.Update(otherElement);
+                    _context.Update(element);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            return RedirectToPage("ElementsListPerPage", new { id = page });
+        }
+    }
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.JobOffers
 {
@@ -53,7 +48,8 @@ namespace LawFirmCMS.Pages.Admin.JobOffers
             if (joboffer != null)
             {
                 JobOffer = joboffer;
-                _context.JobOffer.Remove(JobOffer);
+                JobOffer.IsDeleted = true;
+                _context.Update(JobOffer);
                 await _context.SaveChangesAsync();
             }
 

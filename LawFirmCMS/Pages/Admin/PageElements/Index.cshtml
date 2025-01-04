@@ -5,12 +5,13 @@
 }
 @{
     ViewData["Title"] = "Index";
+    ViewData["NavigationPages"] = "active";
 }
 
-<h1>Index</h1>
+<h1>Page element</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>

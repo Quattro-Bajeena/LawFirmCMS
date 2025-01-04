@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.JobOffers
 {
@@ -19,11 +13,11 @@ namespace LawFirmCMS.Pages.Admin.JobOffers
             _context = context;
         }
 
-        public IList<JobOffer> JobOffer { get;set; } = default!;
+        public IList<JobOffer> JobOffer { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            JobOffer = await _context.JobOffer.ToListAsync();
+            JobOffer = await _context.JobOffer.Where(jo => !jo.IsDeleted).ToListAsync();
         }
     }
 }

@@ -11,10 +11,11 @@ namespace LawFirmCMS.Data.Models
         [Required]
         public int Salary { get; set; } = int.MaxValue;
         [Required]
-        public string Description { get; set; } = string.Empty ;
+        public string Description { get; set; } = string.Empty;
         [Required]
         public string Requirements { get; set; } = string.Empty;
         [Required]
+        [Display(Name = "Deleted")]
         public bool IsDeleted { get; set; } = false;
     }
 }
