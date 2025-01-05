@@ -40,13 +40,13 @@
                                                 @pageData.Title
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                                @foreach(var child in pageData.Children){
-                                                    <li><a class="dropdown-item" asp-page="/Customer/DynamicPage" asp-route-slug="@child.Path">@child.Title</a></li>
+                                                @foreach(var child in pageData.Children.OrderBy(child=>child.Id)){
+                                                    <li><a class="dropdown-item" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path" asp-route-subSlug="@child.Path">@child.Title</a></li>
                                                 }
                                             </ul>
                                         </li>
                                     }
-                                    else{
+                                    else if(!pageData.IsGroup){
                                         <li class="nav-item">
                                             <a class="nav-link" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path">@pageData.Title</a>
                                         </li>

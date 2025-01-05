@@ -73,7 +73,8 @@ namespace LawFirmCMS.Pages.Admin.PageElements
                 PageElement.BinaryData = memoryStream.ToArray();
             }
 
-            PageElement.Order = _context.CustomPages.Single(p => p.Id == PageElement.PageId).Elements?.Count ?? 0;
+            var page = _context.CustomPages.Single(p => p.Id == PageElement.PageId);
+            PageElement.Order = page.Elements.Count > 0 ? page.Elements.Max(pe => pe.Order) + 1 : 0;
 
             _context.PageElements.Add(PageElement);
             await _context.SaveChangesAsync();

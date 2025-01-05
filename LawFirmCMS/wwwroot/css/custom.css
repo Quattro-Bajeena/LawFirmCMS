@@ -125,23 +125,28 @@ h1, h2, h3 {
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    margin: 15px
 }
 
 .page-element {
-    padding: 15px;
+    width: 75%;
+/*    padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 5px;*/
 }
 
 .element-heading {
+    color: #f8b400;
     text-align: center;
-    font-size: 1.8em;
+    font-size: 2.8em;
     font-weight: bold;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+/*    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
     margin-bottom: 10px;
 }
 
@@ -151,8 +156,7 @@ h1, h2, h3 {
 }
 
 .element-image {
-    max-width: 100%;
-    height: auto;
+    width: 50%;
     border-radius: 5px;
 }
 
@@ -166,6 +170,16 @@ h1, h2, h3 {
 .element-employee {
     text-align: center;
     margin: 10px 0;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.element-employee-image {
+    /*    max-height: 200px;
+    width: auto;*/
+    max-height: 200px;
+    object-fit: cover;
 }
 
 .element-button {

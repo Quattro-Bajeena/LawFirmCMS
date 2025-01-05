@@ -87,7 +87,7 @@ namespace LawFirmCMS.Pages.Admin.PageElements
                 return Page();
             }
 
-            _context.Update(PageElement);
+            _context.Attach(PageElement).State = EntityState.Modified;
 
             try
             {

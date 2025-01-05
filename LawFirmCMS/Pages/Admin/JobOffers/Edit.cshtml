@@ -41,12 +41,7 @@
                 <input asp-for="JobOffer.Requirements" class="form-control" />
                 <span asp-validation-for="JobOffer.Requirements" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <span class="text-danger">*</span>
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="JobOffer.IsDeleted" /> @Html.DisplayNameFor(model => model.JobOffer.IsDeleted)
-                </label>
-            </div>
+            <input type="hidden" asp-for="JobOffer.IsDeleted" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

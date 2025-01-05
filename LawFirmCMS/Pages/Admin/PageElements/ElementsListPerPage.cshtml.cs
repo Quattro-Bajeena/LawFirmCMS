@@ -28,13 +28,16 @@ namespace LawFirmCMS.Pages.Admin.PageElements
             }
             Id = (int)id;
             PageName = await _context.CustomPages.Where(m => m.Id == id).Select(m => m.Title).FirstOrDefaultAsync();
-            PageElements = await _context.PageElements.Where(m => m.PageId == id && !m.IsDeleted).ToListAsync();
+            PageElements = await _context.PageElements
+                .Where(m => m.PageId == id && !m.IsDeleted)
+                .OrderBy(pe => pe.Order)
+                .ToListAsync();
 
             return Page();
         }
 
         // TODO to musi być wywołane jako POST
-        public async Task<IActionResult> OnGetChangeOrder(int page, int id, string direction)
+        public async Task<IActionResult> OnPostChangeOrder(int page, int id, string direction)
         {
             var element = _context.PageElements.FirstOrDefault(pe => pe.Id == id);
             if (element != null)

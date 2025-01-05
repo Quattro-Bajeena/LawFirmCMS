@@ -17,20 +17,24 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Login)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Login)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].PasswordHash)
+                @Html.DisplayNameFor(model => model.Employee[0].Expertise)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Boss)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Picture)
+            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -38,19 +42,41 @@
 @foreach (var item in Model.Employee) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PasswordHash)
+                @Html.DisplayFor(modelItem => item.Expertise)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Boss)
+            </td>
+            <td>
+                @if (item.Picture != null)
+                {
+                    var popupId = $"popupContainer_{item.Id}";
+                    var buttonId = $"openPopupBtn_{item.Id}";
+                    var closeButtonId = $"closePopupBtn_{item.Id}";
+
+                    <button class="btn btn-light" id="@buttonId">Show image</button>
+
+                    <div id="@popupId" class="popup-container" style="display:none;">
+                        <div id="@closeButtonId" class="btn close-btn">&times;</div>
+                        @{
+                            var mimeType = item.GetMimeType();
+                        }
+                        <img src="data:@mimeType;base64,@Convert.ToBase64String(item.Picture)" alt="Image" class="popup-image" />
+                    </div>
+                }
+                else
+                {
+                    <p>No picture</p>
+                }
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -61,3 +87,7 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="site.js"></script>
+}

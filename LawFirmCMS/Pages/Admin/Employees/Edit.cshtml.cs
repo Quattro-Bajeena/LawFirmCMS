@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
+using LawFirmCMS.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.Employees
 {
@@ -30,7 +25,7 @@ namespace LawFirmCMS.Pages.Admin.Employees
                 return NotFound();
             }
 
-            var employee =  await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
+            var employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
                 return NotFound();
@@ -48,6 +43,7 @@ namespace LawFirmCMS.Pages.Admin.Employees
                 return Page();
             }
 
+            Employee.Picture = await DataHelper.GetImageFromForm(Request.Form, ModelState);
             _context.Attach(Employee).State = EntityState.Modified;
 
             try

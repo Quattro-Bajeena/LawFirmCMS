@@ -1,0 +1,8 @@
+﻿@model LawFirmCMS.Data.Models.PageElement 
+
+@{
+    var mimeType = Model.GetMimeType();
+}
+<div class="element-image-container">
+    <img src="data:@mimeType;base64,@Convert.ToBase64String(Model.BinaryData)" alt="Image" class="element-image" />
+</div>

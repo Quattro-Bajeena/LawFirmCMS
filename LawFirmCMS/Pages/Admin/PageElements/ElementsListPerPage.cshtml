@@ -1,4 +1,6 @@
 ﻿@page
+@using LawFirmCMS.Data.Enums
+@inject LawFirmCMS.Data.ApplicationDbContext DbContext
 @model LawFirmCMS.Pages.Admin.PageElements.ElementsListPerPageModel
 @{
     Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
@@ -39,12 +41,23 @@
                     @Html.DisplayFor(modelItem => item.Type)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Order)
-                    <a asp-page-handler="ChangeOrder" asp-route-page="@Model.Id" asp-route-id="@item.Id" asp-route-direction="up" asp-route-id="@item.Id">Up</a> |
-                    <a asp-page-handler="ChangeOrder" asp-route-page="@Model.Id" asp-route-id="@item.Id" asp-route-direction="down">Down</a>
+                    <form method="post" >
+                        <button asp-page-handler="ChangeOrder" name="direction" value="up" class="btn btn-light">Up</button> |
+                        <button asp-page-handler="ChangeOrder" name="direction" value="down" class="btn btn-light">Down</button>
+                        <input type="hidden" name="page" value="@Model.Id" />
+                        <input type="hidden" name="id" value="@item.Id" />
+                    </form>
                 </td>
                 <td>
-                    @Html.Raw(item.TextData)
+                    @if(item.Type == PageElementType.Heading){
+                        @Html.DisplayFor(modelItem => item.TextData)
+                    }
+                    else if (item.Type == PageElementType.RichText){
+                        @Html.Raw(item.TextData)
+                    }
+                    else if (item.Type == PageElementType.Employee){
+                        @Html.DisplayFor(modelItem => DbContext.Employees.FirstOrDefault(e => e.Id == int.Parse(item.TextData)).Login)
+                    }                  
                 </td>
                 <td >
                     @if (item.BinaryData != null)
@@ -53,19 +66,13 @@
                         var buttonId = $"openPopupBtn_{item.Id}";
                         var closeButtonId = $"closePopupBtn_{item.Id}";
 
-                        <button id="@buttonId">Pokaż obraz</button>
+                        <button class="btn btn-light" id="@buttonId">Show image</button>
 
                         <div id="@popupId" class="popup-container" style="display:none;">
-                            <span id="@closeButtonId" class="close-btn">&times;</span>
-
+                            <div id="@closeButtonId" class="btn close-btn">&times;</div>
                             @{
-                                var mimeType = "application/octet-stream";
-                                if (item.BinaryData[0] == 0xFF && item.BinaryData[1] == 0xD8) mimeType = "image/jpeg";
-                                if (item.BinaryData[0] == 0x89 && item.BinaryData[1] == 0x50) mimeType = "image/png";
-                                if (item.BinaryData[0] == 0x47 && item.BinaryData[1] == 0x49) mimeType = "image/gif";
-                                if (item.BinaryData[0] == 0x42 && item.BinaryData[1] == 0x4D) mimeType = "image/bmp";
+                                var mimeType = item.GetMimeType();
                             }
-
                             <img src="data:@mimeType;base64,@Convert.ToBase64String(item.BinaryData)" alt="Image" class="popup-image" />
                         </div>
                     }
@@ -84,3 +91,7 @@
         <script src="site.js"></script>
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="site.js"></script>
+}
