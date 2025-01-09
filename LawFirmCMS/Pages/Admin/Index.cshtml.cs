@@ -1,7 +1,7 @@
 using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace LawFirmCMS.Pages.Admin
 {
@@ -9,28 +9,39 @@ namespace LawFirmCMS.Pages.Admin
     {
 
         private ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public List<CustomPage> TopPages { get; set; }
-
-        public AdminIndexModel(ApplicationDbContext context)
+        public AdminIndexModel(ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
+        [BindProperty]
+        public string Login { get; set; }
+        [BindProperty]
+        public string Password { get; set; }
 
-        public void OnGet()
+
+        public async Task OnGetAsync()
         {
-            TopPages = _context.CustomPages.Include(p => p.Children).Where(page => page.IsGroup && !page.IsDeleted).ToList();
+
         }
 
-        public async Task OnGetDelete(int id)
+        public async Task<IActionResult> OnPostAsync()
         {
-            var pageToDelete = _context.CustomPages.FirstOrDefault(page => page.Id == id);
-            if (pageToDelete != null)
+            if (!ModelState.IsValid)
             {
-                pageToDelete.IsDeleted = true;
-                _context.CustomPages.Update(pageToDelete);
-                await _context.SaveChangesAsync();
+                return Page();
+            }
+
+            if (_accountService.Login(Login, Password))
+            {
+                return RedirectToPage("./CustomPages/Index");
+            }
+            else
+            {
+                return Page();
             }
         }
     }

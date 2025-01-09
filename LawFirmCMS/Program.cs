@@ -1,10 +1,16 @@
 using LawFirmCMS.Data;
+using LawFirmCMS.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+builder.Services.AddMemoryCache();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -13,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     .UseLazyLoadingProxies()
     .UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<AccountService>();
 
 
 var app = builder.Build();
@@ -51,6 +59,7 @@ app.MapRazorPages();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

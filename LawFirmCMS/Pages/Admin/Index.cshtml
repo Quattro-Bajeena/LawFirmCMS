@@ -3,71 +3,30 @@
 @{
     Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
 }
-<h1>Pages</h1>
 
-<div class="table">
-    <img src="/img/bg-th-left.gif" width="8" height="7" alt="" class="left" /> <img src="/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-    <table class="listing table" cellpadding="0" cellspacing="0">
-        <tr>
-            <th scope="col" class="first" width="177">Name</th>
-            <th scope="col">Path</th>
-            <th scope="col">Add page</th>
-            <th scope="col">Edit</th>
-            <th scope="col" class="last">Delete</th>
-        </tr>
-        @foreach (var topPage in Model.TopPages)
-        {
-            <tr>
-                <td class="first style1">@topPage.Title</td>
-                <td>@topPage.Path</td>
-                <td><a asp-page="./CustomPages/Create" asp-route-parentId="@topPage.Id"><img src="/img/add-icon.gif" width="16" height="16" alt="add" /></a></td>
-                <td></td>
-                <td><a asp-page-handler="Delete" asp-route-id="@topPage.Id"><img class="last" src="/img/hr.gif" width="16" height="16" alt="" /></a></td>
-            </tr>
-
-            @foreach (var subPage in topPage.Children)
-            {
-                <tr>
-                    <td class="first style2">@subPage.Title</td>
-                    <td>@subPage.Path</td>
-                    <td></td>
-                    <td><a asp-page="Admin/CustomPages/Edit"><img src="/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                    <td><a asp-page-handler="Delete" asp-route-id="@subPage.Id"><img class="last" src="/img/hr.gif" width="16" height="16" alt="" /></a></td>
-                </tr>
-            }
-
-        }
-    </table>
-    <a asp-page="/Admin/CustomPages/Create" class="btn btn-success">Add group</a>
-
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">Administrator panel</h3>
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="Login" class="form-label"></label>
+                            <input asp-for="Login" class="form-control" />
+                            <span asp-validation-for="Login" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input type="password" asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-grid">
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="table">
-    <img src="/img/bg-th-left.gif" width="8" height="7" alt="" class="left" /> <img src="/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-    <table class="listing form" cellpadding="0" cellspacing="0">
-        <tr>
-            <th class="full" colspan="2">Header Here</th>
-        </tr>
-        <tr>
-            <td class="first" width="172"><strong>Lorem Ipsum</strong></td>
-            <td class="last"><input type="text" class="text" /></td>
-        </tr>
-        <tr class="bg">
-            <td class="first"><strong>Lorem Ipsum</strong></td>
-            <td class="last"><input type="text" class="text" /></td>
-        </tr>
-        <tr>
-            <td class="first"><strong>Lorem Ipsum</strong></td>
-            <td class="last"><input type="text" class="text" /></td>
-        </tr>
-        <tr class="bg">
-            <td class="first"><strong>Lorem Ipsum</strong></td>
-            <td class="last"><input type="text" class="text" /></td>
-        </tr>
-    </table>
-    <p>&nbsp;</p>
-</div>
-
-@* <div id="right-column"> *@
-@*     <strong class="h">INFO</strong> *@
-@*     <div class="box">Detect and eliminate viruses and Trojan horses, even new and unknown ones. Detect and eliminate viruses and Trojan horses, even new and </div> *@
-@* </div> *@

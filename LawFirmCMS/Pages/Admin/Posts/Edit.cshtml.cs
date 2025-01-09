@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.Posts
 {
@@ -30,13 +25,13 @@ namespace LawFirmCMS.Pages.Admin.Posts
                 return NotFound();
             }
 
-            var post =  await _context.Posts.FirstOrDefaultAsync(m => m.Id == id);
+            var post = await _context.Posts.FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
                 return NotFound();
             }
             Post = post;
-           ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Login");
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Login");
             return Page();
         }
 

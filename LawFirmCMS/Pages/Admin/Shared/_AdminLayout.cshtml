@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿@inject LawFirmCMS.Services.AccountService AccountService
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,34 +18,38 @@
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <div class="container-fluid">
-        <a class="navbar-brand" asp-page="/Index">Public</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link @ViewData["NavigationPages"]" asp-page="/Admin/CustomPages/Index">Pages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @ViewData["NavigationEmployees"]" asp-page="/Admin/Employees/Index">Employees</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @ViewData["NavigationJobOffers"]" asp-page="/Admin/JobOffers/Index">Job Offers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @ViewData["NavigationForms"]" asp-page="/Admin/Forms/Index">Forms</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @ViewData["NavigationPosts"]" asp-page="/Admin/Posts/Index">Posts</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    @if(AccountService.IsLoggedIn()){
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+          <div class="container-fluid">
+            <a class="navbar-brand" asp-page="/Index">Public</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                @if(AccountService.IsBoss()){
+                    <li class="nav-item">
+                        <a class="nav-link @ViewData["NavigationPages"]" asp-page="/Admin/CustomPages/Index">Pages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @ViewData["NavigationJobOffers"]" asp-page="/Admin/JobOffers/Index">Job Offers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @ViewData["NavigationForms"]" asp-page="/Admin/Forms/Index">Forms</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link @ViewData["NavigationEmployees"]" asp-page="/Admin/Employees/Index">Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @ViewData["NavigationPosts"]" asp-page="/Admin/Posts/Index">Posts</a>
+                </li>
+                </ul>
+            </div>
+          </div>
+        </nav>
+    }
+  
 
     <main class="container">
       <div class="bg-body-tertiary">

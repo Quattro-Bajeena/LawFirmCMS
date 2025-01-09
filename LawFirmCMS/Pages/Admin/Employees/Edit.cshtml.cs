@@ -1,5 +1,6 @@
 ﻿using LawFirmCMS.Data.Models;
 using LawFirmCMS.Helpers;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,8 @@ namespace LawFirmCMS.Pages.Admin.Employees
             Employee = employee;
             return Page();
         }
+        [BindProperty]
+        public string? Password { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more information, see https://aka.ms/RazorPagesCRUD.
@@ -43,7 +46,24 @@ namespace LawFirmCMS.Pages.Admin.Employees
                 return Page();
             }
 
-            Employee.Picture = await DataHelper.GetImageFromForm(Request.Form, ModelState);
+            var employee = await _context.Employees.AsNoTracking().FirstOrDefaultAsync(m => m.Id == Employee.Id);
+            if (!string.IsNullOrEmpty(Password))
+            {
+                Employee.PasswordHash = AccountService.HashPasword(Password);
+            }
+            else
+            {
+                Employee.PasswordHash = employee.PasswordHash;
+            }
+            if (Request.Form.Files["fileInput"] != null)
+            {
+                Employee.Picture = await DataHelper.GetImageFromForm(Request.Form, ModelState);
+            }
+            else
+            {
+                Employee.Picture = employee.Picture;
+            }
+
             _context.Attach(Employee).State = EntityState.Modified;
 
             try

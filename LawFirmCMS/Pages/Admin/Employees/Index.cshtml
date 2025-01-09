@@ -63,7 +63,7 @@
                     var buttonId = $"openPopupBtn_{item.Id}";
                     var closeButtonId = $"closePopupBtn_{item.Id}";
 
-                    <button class="btn btn-light" id="@buttonId">Show image</button>
+                    <button class="btn btn-light" id="@buttonId">Show picture</button>
 
                     <div id="@popupId" class="popup-container" style="display:none;">
                         <div id="@closeButtonId" class="btn close-btn">&times;</div>
@@ -75,10 +75,10 @@
                 }
                 else
                 {
-                    <p>No picture</p>
+                        <p>No picture</p>
                 }
             </td>
-            <td>
+            <td width="190">
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>

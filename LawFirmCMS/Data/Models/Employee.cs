@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace LawFirmCMS.Data.Models
 {
@@ -12,8 +13,7 @@ namespace LawFirmCMS.Data.Models
         public string Surname { get; set; }
         [Required]
         public string Login { get; set; }
-        [Required]
-        [Display(Name = "Password")]
+        [ValidateNever]
         public byte[] PasswordHash { get; set; }
         [Required]
         public bool Boss { get; set; }
