@@ -29,5 +29,17 @@ namespace LawFirmCMS.Helpers
             else
                 return null;
         }
+
+        public static string TrimText(string original, int maxCharacters)
+        {
+            if (string.IsNullOrEmpty(original) || original.Length <= maxCharacters)
+            {
+                return original;
+            }
+            else
+            {
+                return original.Substring(0, maxCharacters) + "...";
+            }
+        }
     }
 }

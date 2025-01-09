@@ -1,5 +1,6 @@
 ﻿using LawFirmCMS.Data.Enums;
 using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,16 +10,18 @@ namespace LawFirmCMS.Pages.Admin.PageElements
     public class CreateModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         public int ParentPageId { get; set; }
         public IActionResult OnGet(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsBoss())
             {
                 return NotFound();
             }
@@ -26,7 +29,7 @@ namespace LawFirmCMS.Pages.Admin.PageElements
             ParentPageId = (int)id;
 
             ViewData["PageId"] = new SelectList(_context.CustomPages.Where(page => page.Id == ParentPageId), "Id", "Title", ParentPageId);
-            ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)));
+            ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)), PageElementType.RichText);
             ViewData["Employees"] = new SelectList(_context.Employees, "Id", "Login");
             return Page();
         }
@@ -36,6 +39,10 @@ namespace LawFirmCMS.Pages.Admin.PageElements
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!_accountService.IsBoss())
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 foreach (var state in ModelState)

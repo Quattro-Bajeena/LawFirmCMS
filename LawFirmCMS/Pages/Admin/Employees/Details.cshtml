@@ -1,5 +1,6 @@
 ﻿@page
 @model LawFirmCMS.Pages.Admin.Employees.DetailsModel
+@inject LawFirmCMS.Services.AccountService AccountService
 @{
     Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
 }
@@ -47,6 +48,10 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Employee.Id">Edit</a> |
+    @if (AccountService.IsBoss() || AccountService.LoggedId() == Model.Employee.Id){
+        <a asp-page="./Edit" asp-route-id="@Model.Employee.Id">Edit</a>
+        <div class="vr"></div>
+    }
+    
     <a asp-page="./Index">Back to List</a>
 </div>

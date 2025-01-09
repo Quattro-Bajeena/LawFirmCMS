@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.JobOffers
 {
     public class EditModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public EditModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public EditModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         [BindProperty]
@@ -25,12 +22,12 @@ namespace LawFirmCMS.Pages.Admin.JobOffers
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsBoss())
             {
                 return NotFound();
             }
 
-            var joboffer =  await _context.JobOffer.FirstOrDefaultAsync(m => m.Id == id);
+            var joboffer = await _context.JobOffer.FirstOrDefaultAsync(m => m.Id == id);
             if (joboffer == null)
             {
                 return NotFound();
@@ -43,6 +40,10 @@ namespace LawFirmCMS.Pages.Admin.JobOffers
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!_accountService.IsBoss())
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 return Page();

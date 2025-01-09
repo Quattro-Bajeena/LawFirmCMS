@@ -1,5 +1,6 @@
 ﻿@page
 @model LawFirmCMS.Pages.Admin.Employees.IndexModel
+@inject LawFirmCMS.Services.AccountService AccountService
 @{
     Layout = "~/Pages/Admin/Shared/_AdminLayout.cshtml";
 }
@@ -79,9 +80,16 @@
                 }
             </td>
             <td width="190">
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (AccountService.IsBoss() || AccountService.LoggedId() == item.Id){
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                        <div class="vr"></div>
+                    }
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    @if (AccountService.IsBoss() )
+                    {
+                        <div class="vr"></div>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }  
             </td>
         </tr>
 }

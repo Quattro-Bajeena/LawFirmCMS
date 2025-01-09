@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.JobOffers
 {
     public class CreateModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         public IActionResult OnGet()
@@ -30,6 +27,10 @@ namespace LawFirmCMS.Pages.Admin.JobOffers
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!_accountService.IsBoss())
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 return Page();

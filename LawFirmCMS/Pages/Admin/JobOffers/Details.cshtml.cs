@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LawFirmCMS.Data;
-using LawFirmCMS.Data.Models;
 
 namespace LawFirmCMS.Pages.Admin.JobOffers
 {
     public class DetailsModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public DetailsModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public DetailsModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         public JobOffer JobOffer { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsBoss())
             {
                 return NotFound();
             }

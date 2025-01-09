@@ -1,4 +1,5 @@
 ﻿using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,12 @@ namespace LawFirmCMS.Pages.Admin.PageElements
     public class ElementsListPerPageModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public ElementsListPerPageModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public ElementsListPerPageModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         [BindProperty]
@@ -21,9 +24,8 @@ namespace LawFirmCMS.Pages.Admin.PageElements
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsBoss())
             {
-                Console.WriteLine("Null");
                 return NotFound();
             }
             Id = (int)id;
@@ -36,9 +38,12 @@ namespace LawFirmCMS.Pages.Admin.PageElements
             return Page();
         }
 
-        // TODO to musi być wywołane jako POST
         public async Task<IActionResult> OnPostChangeOrder(int page, int id, string direction)
         {
+            if (!_accountService.IsBoss())
+            {
+                return NotFound();
+            }
             var element = _context.PageElements.FirstOrDefault(pe => pe.Id == id);
             if (element != null)
             {

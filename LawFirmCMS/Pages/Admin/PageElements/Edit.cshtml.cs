@@ -1,5 +1,6 @@
 ﻿using LawFirmCMS.Data.Enums;
 using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,10 +11,12 @@ namespace LawFirmCMS.Pages.Admin.PageElements
     public class EditModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public EditModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public EditModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         [BindProperty]
@@ -21,7 +24,7 @@ namespace LawFirmCMS.Pages.Admin.PageElements
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsBoss())
             {
                 return NotFound();
             }
@@ -42,6 +45,10 @@ namespace LawFirmCMS.Pages.Admin.PageElements
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!_accountService.IsBoss())
+            {
+                return NotFound();
+            }
 
             PageElement.Page = _context.CustomPages.Where(p => p.Id == PageElement.PageId).First();
 

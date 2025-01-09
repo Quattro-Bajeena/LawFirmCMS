@@ -1,4 +1,5 @@
 ﻿using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,10 +10,12 @@ namespace LawFirmCMS.Pages.Admin.Posts
     public class EditModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public EditModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public EditModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         [BindProperty]
@@ -20,7 +23,7 @@ namespace LawFirmCMS.Pages.Admin.Posts
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsLoggedIn())
             {
                 return NotFound();
             }
@@ -39,6 +42,10 @@ namespace LawFirmCMS.Pages.Admin.Posts
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!_accountService.IsLoggedIn())
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 return Page();

@@ -10,14 +10,20 @@ namespace LawFirmCMS.Pages.Admin.Employees
     public class CreateModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         public IActionResult OnGet()
         {
+            if (!_accountService.IsBoss())
+            {
+                return NotFound();
+            }
             return Page();
         }
 
@@ -31,7 +37,10 @@ namespace LawFirmCMS.Pages.Admin.Employees
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-
+            if (!_accountService.IsBoss())
+            {
+                return NotFound();
+            }
             if (!ModelState.IsValid)
             {
                 return Page();

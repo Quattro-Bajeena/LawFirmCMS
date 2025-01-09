@@ -1,5 +1,6 @@
 ﻿@page
 @using LawFirmCMS.Data.Enums
+@using LawFirmCMS.Helpers
 @inject LawFirmCMS.Data.ApplicationDbContext DbContext
 @model LawFirmCMS.Pages.Admin.PageElements.ElementsListPerPageModel
 @{
@@ -53,7 +54,7 @@
                         @Html.DisplayFor(modelItem => item.TextData)
                     }
                     else if (item.Type == PageElementType.RichText){
-                        @Html.Raw(item.TextData)
+                        @Html.Raw( item.TextData)
                     }
                     else if (item.Type == PageElementType.Employee){
                         @Html.DisplayFor(modelItem => DbContext.Employees.FirstOrDefault(e => e.Id == int.Parse(item.TextData)).Login)

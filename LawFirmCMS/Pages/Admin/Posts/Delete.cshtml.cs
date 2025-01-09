@@ -1,4 +1,5 @@
 ﻿using LawFirmCMS.Data.Models;
+using LawFirmCMS.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,12 @@ namespace LawFirmCMS.Pages.Admin.Posts
     public class DeleteModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public DeleteModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public DeleteModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         [BindProperty]
@@ -19,7 +22,7 @@ namespace LawFirmCMS.Pages.Admin.Posts
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsLoggedIn())
             {
                 return NotFound();
             }
@@ -39,7 +42,7 @@ namespace LawFirmCMS.Pages.Admin.Posts
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsLoggedIn())
             {
                 return NotFound();
             }

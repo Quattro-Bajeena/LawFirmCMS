@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/LawFirmCMS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    <title>@ViewData["Title"] - LawFirmCMS Client</title>
+    <title>@ViewData["Title"] - Admin</title>
 </head>
 
 <body>
@@ -22,9 +22,11 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
           <div class="container-fluid">
             <a class="navbar-brand" asp-page="/Index">Public</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 @if(AccountService.IsBoss()){
@@ -45,6 +47,12 @@
                     <a class="nav-link @ViewData["NavigationPosts"]" asp-page="/Admin/Posts/Index">Posts</a>
                 </li>
                 </ul>
+                <div data-bs-toggle="collapse" class="d-inline-flex align-items-baseline gap-4" >
+                    <span class="text-light bg-dark">@AccountService.CurrentLogin()</span>
+                    <form method="post" >
+                        <button asp-page="/Admin/Index" asp-page-handler="Logout" class="btn btn-outline-danger">Logout</button> 
+                    </form>
+                </div>
             </div>
           </div>
         </nav>

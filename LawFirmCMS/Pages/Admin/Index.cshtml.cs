@@ -23,9 +23,20 @@ namespace LawFirmCMS.Pages.Admin
         public string Password { get; set; }
 
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-
+            if (_accountService.IsLoggedIn())
+            {
+                if (_accountService.IsBoss())
+                {
+                    return RedirectToPage("./CustomPages/Index");
+                }
+                else
+                {
+                    return RedirectToPage("./Posts/Index");
+                }
+            }
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -37,12 +48,29 @@ namespace LawFirmCMS.Pages.Admin
 
             if (_accountService.Login(Login, Password))
             {
-                return RedirectToPage("./CustomPages/Index");
+                if (_accountService.IsBoss())
+                {
+                    return RedirectToPage("./CustomPages/Index");
+                }
+                else
+                {
+                    return RedirectToPage("./Posts/Index");
+                }
             }
             else
             {
                 return Page();
             }
+        }
+
+        public async Task<IActionResult> OnPostLogout()
+        {
+            if (!_accountService.IsLoggedIn())
+            {
+                return NotFound();
+            }
+            _accountService.Logout();
+            return RedirectToPage("./Index");
         }
     }
 }

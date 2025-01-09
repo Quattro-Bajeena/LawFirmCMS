@@ -4,6 +4,7 @@ using LawFirmCMS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LawFirmCMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250109211952_Admin")]
+    partial class Admin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,16 +110,6 @@ namespace LawFirmCMS.Migrations
                             Name = "Admin",
                             PasswordHash = new byte[] { 243, 130, 113, 232, 45, 22, 9, 95, 121, 209, 56, 49, 115, 176, 181, 19, 20, 81, 7, 88, 223, 126, 248, 1, 2, 37, 166, 170, 148, 180, 63, 110, 39, 237, 221, 170, 169, 135, 129, 66, 118, 181, 60, 68, 120, 8, 102, 26, 67, 182, 12, 68, 170, 54, 141, 219, 243, 167, 37, 183, 203, 104, 174, 179 },
                             Surname = "Admin"
-                        },
-                        new
-                        {
-                            Id = -2,
-                            Boss = false,
-                            IsDeleted = false,
-                            Login = "employee",
-                            Name = "Employee",
-                            PasswordHash = new byte[] { 128, 163, 1, 212, 67, 116, 71, 55, 181, 208, 199, 199, 132, 76, 101, 6, 142, 196, 16, 34, 11, 202, 119, 202, 6, 95, 44, 188, 62, 99, 92, 157, 239, 21, 208, 174, 233, 33, 63, 157, 102, 36, 241, 222, 247, 17, 247, 171, 195, 179, 72, 81, 219, 19, 234, 85, 10, 80, 179, 217, 108, 72, 52, 213 },
-                            Surname = "Employee"
                         });
                 });
 

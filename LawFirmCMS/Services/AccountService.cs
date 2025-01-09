@@ -37,6 +37,7 @@ namespace LawFirmCMS.Services
 
         static string SessionStateKey = "SessionState";
         static string EmployeeIdKey = "EmployeeId";
+        static string EmployeeLoginKey = "EmployeLogin";
         public SessionState State()
         {
             if (_httpContextAccessor.HttpContext.Session.GetInt32(SessionStateKey) == null)
@@ -49,6 +50,11 @@ namespace LawFirmCMS.Services
         public int? LoggedId()
         {
             return _httpContextAccessor.HttpContext.Session.GetInt32(EmployeeIdKey) ?? null;
+        }
+
+        public string CurrentLogin()
+        {
+            return _httpContextAccessor.HttpContext.Session.GetString(EmployeeLoginKey) ?? null;
         }
 
         public bool IsBoss()
@@ -78,10 +84,17 @@ namespace LawFirmCMS.Services
                 SessionState state = employee.Boss ? SessionState.Boss : SessionState.Employee;
                 _httpContextAccessor.HttpContext.Session.SetInt32(SessionStateKey, (int)state);
                 _httpContextAccessor.HttpContext.Session.SetInt32(EmployeeIdKey, employee.Id);
+                _httpContextAccessor.HttpContext.Session.SetString(EmployeeLoginKey, employee.Login);
                 return true;
             }
             return false;
+        }
 
+        public void Logout()
+        {
+            _httpContextAccessor.HttpContext.Session.SetInt32(SessionStateKey, (int)SessionState.Anonymous);
+            _httpContextAccessor.HttpContext.Session.Remove(EmployeeIdKey);
+            _httpContextAccessor.HttpContext.Session.Remove(EmployeeLoginKey);
         }
     }
 }

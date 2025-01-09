@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LawFirmCMS.Data.Models
@@ -12,10 +13,12 @@ namespace LawFirmCMS.Data.Models
         [Required]
         public string Content { get; set; }
         [Required]
+        [ValidateNever]
         public DateTime PublishDate { get; set; }
         [ForeignKey("EmployeeId")]
         public virtual Employee? Employee { get; set; }
         [Display(Name = "Employee")]
+        [ValidateNever]
         public int EmployeeId { get; set; }
 
         [Required]

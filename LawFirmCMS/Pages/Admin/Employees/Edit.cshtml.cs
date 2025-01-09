@@ -10,10 +10,12 @@ namespace LawFirmCMS.Pages.Admin.Employees
     public class EditModel : PageModel
     {
         private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly AccountService _accountService;
 
-        public EditModel(LawFirmCMS.Data.ApplicationDbContext context)
+        public EditModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         [BindProperty]
@@ -21,7 +23,12 @@ namespace LawFirmCMS.Pages.Admin.Employees
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null || !_accountService.IsLoggedIn())
+            {
+                return NotFound();
+            }
+
+            if (_accountService.State() == Data.Enums.SessionState.Employee && _accountService.LoggedId() != id)
             {
                 return NotFound();
             }
@@ -41,6 +48,16 @@ namespace LawFirmCMS.Pages.Admin.Employees
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!_accountService.IsLoggedIn())
+            {
+                return NotFound();
+            }
+
+            if (_accountService.State() == Data.Enums.SessionState.Employee && _accountService.LoggedId() != Employee.Id)
+            {
+                return NotFound();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
