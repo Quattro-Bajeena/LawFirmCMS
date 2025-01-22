@@ -9,6 +9,7 @@ namespace LawFirmCMS.Pages
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            RedirectToPage();
         }
 
         public void OnGet()

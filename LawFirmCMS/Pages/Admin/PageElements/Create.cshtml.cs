@@ -31,7 +31,9 @@ namespace LawFirmCMS.Pages.Admin.PageElements
             ViewData["PageId"] = new SelectList(_context.CustomPages.Where(page => page.Id == ParentPageId), "Id", "Title", ParentPageId);
             ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)), PageElementType.RichText);
             ViewData["Employees"] = new SelectList(_context.Employees, "Id", "Login");
-            return Page();
+			ViewData["JobOffers"] = new SelectList(_context.JobOffer, "Id", "Position");
+
+			return Page();
         }
 
         [BindProperty]

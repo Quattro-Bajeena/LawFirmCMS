@@ -33,6 +33,16 @@ namespace LawFirmCMS.Data
                 PasswordHash = AccountService.HashPasword("1234"),
                 Boss = false
             });
+
+            modelBuilder.Entity<CustomPage>().HasData(new CustomPage
+            {
+                Id = -1,
+                Title = "Home",
+                Path = "Home",
+                IsDeleted = false,
+                IsGroup = false,
+                ParentId = null,
+            });
         }
 
         public DbSet<Employee> Employees { get; set; }

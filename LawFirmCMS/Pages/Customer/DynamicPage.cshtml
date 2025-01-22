@@ -8,14 +8,14 @@
     ViewData["Title"] = Model.PageData?.Title ?? "Page Not Found";
 }
 
-<div class="page-elements-container">
+<div>
     @foreach (var element in Model.PageElements)
     {
-        <div class="page-element">
+        <div>
             @switch (element.Type)
             {
                 case LawFirmCMS.Data.Enums.PageElementType.Heading:
-                    <h1 class="element-heading">@Html.DisplayFor(model => element.TextData)</h1>
+                    <h1 class="element-heading text-center h-100 w-100 m-3">@Html.DisplayFor(model => element.TextData)</h1>
                     break;
 
                 case LawFirmCMS.Data.Enums.PageElementType.Image:
@@ -23,26 +23,52 @@
                     break;
 
                 case LawFirmCMS.Data.Enums.PageElementType.RichText:
-                    <div class="element-richtext">@Html.Raw(element.TextData)</div>
+                    <div class="element-richtext text-center h-100 w-100 m-3">@Html.Raw(element.TextData)</div>
                     break;
 
                 case LawFirmCMS.Data.Enums.PageElementType.Employee:
                     var employee = Context.Employees.First(em => em.Id == Int32.Parse(element.TextData));
-                    
-                    <div class="element-employee card">
+
+                    <div class="element-employee card text-center h-100 w-100 m-3 d-flex flex-row">
                         @if (employee.Picture != null)
                         {
                             var mimeType = employee.GetMimeType();
-                            <img class="card-img-top element-employee-image" src="data:@mimeType;base64,@Convert.ToBase64String(employee.Picture)" alt="Image" />
+                            Console.WriteLine("Hello this is my picture!" + employee.Picture);
+                            <div class="element-employee-image-wrapper">
+                                <img class="card-img-left element-employee-image" src="data:@mimeType;base64,@Convert.ToBase64String(employee.Picture)" alt="Image" />
+                            </div>
                         }
-                        <div class="card-body">
+                        <div class="card-body text-start">
                             <h5 class="card-title">@employee.Name @employee.Surname</h5>
                             <h6 class="card-subtitle mb-2 text-muted">@employee.Login</h6>
                             <p class="card-text">@employee.Expertise</p>
                         </div>
                     </div>
+
                     break;
 
+                case LawFirmCMS.Data.Enums.PageElementType.ScreenWideImage:
+                    <section class="hero text-white text-center h-100 w-100 p-5 m-0"
+                    style="background: url('data:image/jpeg;base64,@Convert.ToBase64String(element.BinaryData)') no-repeat center center; background-size: cover;">
+                        <div class="container p-5">
+                            <h1 class="display-4">@Html.Raw(element.TextData)</h1>
+                        </div>
+                    </section>
+                    break;
+
+                case LawFirmCMS.Data.Enums.PageElementType.JobOffer:
+                    var jobOffer = Context.JobOffer.First(j => j.Id == Int32.Parse(element.TextData));
+
+                    <div class="element-joboffer card text-center h-100 w-100 d-flex flex-row m-3">
+                        <div class="card-body text-start">
+                            <h5 class="card-title">@jobOffer.Position</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Salary: @jobOffer.Salary</h6>
+                            <p class="card-text"><strong>Description:</strong> @jobOffer.Description</p>
+                            <p class="card-text"><strong>Requirements:</strong> @jobOffer.Requirements</p>
+                        </div>
+                    </div>
+
+                    break;
                 default:
                     <p class="element-unsupported">[Unsupported Element]</p>
                     break;

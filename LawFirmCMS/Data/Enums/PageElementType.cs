@@ -9,5 +9,7 @@ namespace LawFirmCMS.Data.Enums
         RichText = 1,
         Image = 2,
         Employee = 3,
+        ScreenWideImage = 4,
+        JobOffer = 5
     }
 }
