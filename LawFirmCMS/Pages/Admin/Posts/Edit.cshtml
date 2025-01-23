@@ -29,8 +29,13 @@
                 <textarea asp-for="Post.Content" class="form-control" ></textarea>
                 <span asp-validation-for="Post.Content" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <span class="text-danger">*</span>
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Post.IsDeleted" /> @Html.DisplayNameFor(model => model.Post.IsDeleted)
+                </label>
+            </div>
             <input type="hidden" asp-for="Post.PublishDate" />
-            <input type="hidden" asp-for="Post.IsDeleted" />
             <input type="hidden" asp-for="Post.EmployeeId" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

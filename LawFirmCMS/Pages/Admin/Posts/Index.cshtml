@@ -29,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Post[0].Employee)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].IsDeleted)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -38,8 +41,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
-                    @Html.Raw(item.Content)
+            <td >
+                    <div class="text-truncate text-wrap" style="max-height: 300px;max-width: 500px">
+                        @Html.Raw(item.Content)
+                </div>
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PublishDate)
@@ -47,7 +53,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Employee.Login)
             </td>
-                <td width="190">
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td width="190">
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
