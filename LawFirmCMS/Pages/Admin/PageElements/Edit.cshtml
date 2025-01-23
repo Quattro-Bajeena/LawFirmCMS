@@ -47,6 +47,11 @@
                 <select id="textdata-employee" asp-for="PageElement.TextData" class="form-control" asp-items="ViewBag.Employees"></select>
                 <span asp-validation-for="PageElement.TextData" class="text-danger"></span>
             </div>
+            <div class="form-group" id="joboffer-group">
+                <label for="JobOffer" class="control-label">JobOffer</label>
+                <select id="textdata-jobOffer" asp-for="PageElement.TextData" class="form-control" asp-items="ViewBag.JobOffers"></select>
+                <span asp-validation-for="PageElement.TextData" class="text-danger"></span>
+            </div>
             <input type="hidden" asp-for="PageElement.Order" />
             <input type="hidden" asp-for="PageElement.IsDeleted" />
             <div class="form-group">
