@@ -26,7 +26,7 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
             }
 
             ParentlessPages = await _context.CustomPages
-                .Where(c => !c.IsDeleted && c.ParentId == null)
+                .Where(c => c.ParentId == null)
                 .ToListAsync();
 
             return Page();

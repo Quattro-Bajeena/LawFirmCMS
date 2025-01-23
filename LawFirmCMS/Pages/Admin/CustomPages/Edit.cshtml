@@ -40,6 +40,12 @@
                 <select asp-for="CustomPage.ParentId" class="form-control" asp-items="ViewBag.ParentId"></select>
                 <span asp-validation-for="CustomPage.ParentId" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <span class="text-danger">*</span>
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CustomPage.IsDeleted" /> Hidden
+                </label>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

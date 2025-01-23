@@ -34,22 +34,25 @@
                             {
                                 foreach (var pageData in parentlessPages)
                                 {
-                                    if (pageData.IsGroup && pageData.Children?.Count > 0){
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                @pageData.Title
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                                @foreach(var child in pageData.Children.OrderBy(child=>child.Id)){
-                                                    <li><a class="dropdown-item" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path" asp-route-subSlug="@child.Path">@child.Title</a></li>
-                                                }
-                                            </ul>
-                                        </li>
-                                    }
-                                    else if(!pageData.IsGroup){
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path">@pageData.Title</a>
-                                        </li>
+                                    if (pageData.IsDeleted == false)
+                                    {
+                                        if (pageData.IsGroup && pageData.Children?.Count > 0){
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    @pageData.Title
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                                    @foreach(var child in pageData.Children.OrderBy(child=>child.Id)){
+                                                        <li><a class="dropdown-item" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path" asp-route-subSlug="@child.Path">@child.Title</a></li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                        else if(!pageData.IsGroup){
+                                            <li class="nav-item">
+                                                <a class="nav-link" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path">@pageData.Title</a>
+                                            </li>
+                                        }
                                     }
                                 }
                             }
