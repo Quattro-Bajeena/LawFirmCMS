@@ -1,4 +1,6 @@
-﻿@inject LawFirmCMS.Data.ApplicationDbContext DbContext
+﻿@using LawFirmCMS.Data.Models
+@inject LawFirmCMS.Data.ApplicationDbContext DbContext
+@inject LawFirmCMS.Services.ConfigurationService ConfigurationService
 
 @{
     var parentlessPages = DbContext.CustomPages.Where(page => !page.IsDeleted && page.ParentId == null).ToList();
@@ -18,7 +20,7 @@
     <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="site-wrapper">
+    <div class="d-flex flex-column min-vh-100">
         <header class="site-header">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
@@ -36,19 +38,22 @@
                                 {
                                     if (pageData.IsDeleted == false)
                                     {
-                                        if (pageData.IsGroup && pageData.Children?.Count > 0){
+                                        if (pageData.IsGroup && pageData.Children?.Count > 0)
+                                        {
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     @pageData.Title
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                                    @foreach(var child in pageData.Children.OrderBy(child=>child.Id)){
+                                                    @foreach (var child in pageData.Children.OrderBy(child => child.Id))
+                                                    {
                                                         <li><a class="dropdown-item" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path" asp-route-subSlug="@child.Path">@child.Title</a></li>
                                                     }
                                                 </ul>
                                             </li>
                                         }
-                                        else if(!pageData.IsGroup){
+                                        else if (!pageData.IsGroup)
+                                        {
                                             <li class="nav-item">
                                                 <a class="nav-link" asp-page="/Customer/DynamicPage" asp-route-slug="@pageData.Path">@pageData.Title</a>
                                             </li>
@@ -64,28 +69,28 @@
                             }
                         </ul>
 
-                        <li class="nav-item">
-                            <a class="nav-link" asp-page="/Customer/Posts/Index">Publications</a>
-                        </li>
-
+                        @if (ConfigurationService.IsBlogVisible()){
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Customer/Posts/Index">Publications</a>
+                            </li>
+                        }
                         <a asp-page="/Customer/Forms/Create" class="nav-link contact-us-link ms-3">Contact Us</a>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <div class="content-wrapper">
+        <div class="">
             <main role="main">
                 @RenderBody()
             </main>
         </div>
 
-        <footer class="bg-dark text-white py-5">
+        <footer class="bg-dark text-white">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>&copy; 2024 - LawFirmCMS. All Rights Reserved.</p>
-                    </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4">
+                    <p>&copy; 2025 - LawFirmCMS. All Rights Reserved.</p>
+                    @Html.Raw( DbContext.Configurations.FirstOrDefault(conf => conf.Key == Configuration.FOOTER)?.Value)
                 </div>
             </div>
         </footer>

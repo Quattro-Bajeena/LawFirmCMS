@@ -8,10 +8,10 @@ namespace LawFirmCMS.Pages.Admin.PageElements
 {
     public class ElementsListPerPageModel : PageModel
     {
-        private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
         private readonly AccountService _accountService;
 
-        public ElementsListPerPageModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
+        public ElementsListPerPageModel(Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
             _accountService = accountService;

@@ -8,10 +8,10 @@ namespace LawFirmCMS.Pages.Admin.CustomPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
         private readonly AccountService _accountService;
 
-        public DeleteModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
+        public DeleteModel(Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
             _accountService = accountService;

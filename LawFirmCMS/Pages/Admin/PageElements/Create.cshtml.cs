@@ -9,10 +9,10 @@ namespace LawFirmCMS.Pages.Admin.PageElements
 {
     public class CreateModel : PageModel
     {
-        private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
         private readonly AccountService _accountService;
 
-        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
+        public CreateModel(Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
             _accountService = accountService;
@@ -31,9 +31,9 @@ namespace LawFirmCMS.Pages.Admin.PageElements
             ViewData["PageId"] = new SelectList(_context.CustomPages.Where(page => page.Id == ParentPageId), "Id", "Title", ParentPageId);
             ViewData["Type"] = new SelectList(Enum.GetValues(typeof(PageElementType)), PageElementType.RichText);
             ViewData["Employees"] = new SelectList(_context.Employees, "Id", "Login");
-			ViewData["JobOffers"] = new SelectList(_context.JobOffer, "Id", "Position");
+            ViewData["JobOffers"] = new SelectList(_context.JobOffer, "Id", "Position");
 
-			return Page();
+            return Page();
         }
 
         [BindProperty]

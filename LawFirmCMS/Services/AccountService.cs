@@ -6,8 +6,6 @@ using System.Text;
 
 namespace LawFirmCMS.Services
 {
-
-
     public class AccountService
     {
         static byte[] salt = Encoding.UTF8.GetBytes("we are not salting");

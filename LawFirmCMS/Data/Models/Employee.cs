@@ -34,13 +34,18 @@ namespace LawFirmCMS.Data.Models
             if (Picture != null && Picture.Length > 0)
             {
                 var mimeType = "application/octet-stream";
-                if (Picture[0] == 0xFF && Picture[1] == 0xD8) mimeType = "image/jpeg";
-                if (Picture[0] == 0x89 && Picture[1] == 0x50) mimeType = "image/png";
-                if (Picture[0] == 0x47 && Picture[1] == 0x49) mimeType = "image/gif";
-                if (Picture[0] == 0x42 && Picture[1] == 0x4D) mimeType = "image/bmp";
+                if (Picture[0] == 0xFF && Picture[1] == 0xD8)
+                    mimeType = "image/jpeg";
+                if (Picture[0] == 0x89 && Picture[1] == 0x50)
+                    mimeType = "image/png";
+                if (Picture[0] == 0x47 && Picture[1] == 0x49)
+                    mimeType = "image/gif";
+                if (Picture[0] == 0x42 && Picture[1] == 0x4D)
+                    mimeType = "image/bmp";
                 return mimeType;
             }
-            else return null;
+            else
+                return null;
 
         }
     }

@@ -9,10 +9,10 @@ namespace LawFirmCMS.Pages.Admin.Posts
 {
     public class EditModel : PageModel
     {
-        private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
         private readonly AccountService _accountService;
 
-        public EditModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
+        public EditModel(Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
             _accountService = accountService;

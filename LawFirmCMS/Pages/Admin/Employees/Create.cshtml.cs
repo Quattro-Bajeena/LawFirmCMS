@@ -9,10 +9,10 @@ namespace LawFirmCMS.Pages.Admin.Employees
 {
     public class CreateModel : PageModel
     {
-        private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
         private readonly AccountService _accountService;
 
-        public CreateModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
+        public CreateModel(Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
             _accountService = accountService;

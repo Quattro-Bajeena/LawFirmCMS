@@ -8,10 +8,10 @@ namespace LawFirmCMS.Pages.Admin.JobOffers
 {
     public class IndexModel : PageModel
     {
-        private readonly LawFirmCMS.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
         private readonly AccountService _accountService;
 
-        public IndexModel(LawFirmCMS.Data.ApplicationDbContext context, AccountService accountService)
+        public IndexModel(Data.ApplicationDbContext context, AccountService accountService)
         {
             _context = context;
             _accountService = accountService;

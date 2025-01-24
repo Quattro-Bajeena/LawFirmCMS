@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LawFirmCMS.Data.ApplicationDbContext" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAgAAAAAAkAAAAABAAAAAAAGAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\ApplicationDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Data.Models.CustomPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAACAAEIAAAAUQAAAAAAAAAAAAgAAAQAIAAA=</HashCode>
+      <FileName>Data\Models\CustomPage.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parent" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+      <Property Name="Elements" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LawFirmCMS.Data.Models.Employee" Collapsed="true">
+    <Position X="14" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCgABAAAAAAAAARAAAAAQABAAAAAAAAAAQAQAAAAA=</HashCode>
+      <FileName>Data\Models\Employee.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Posts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Data.Models.Form" Collapsed="true">
+    <Position X="11.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAiAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Models\Form.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Data.Models.JobOffer" Collapsed="true">
+    <Position X="12" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAgAAAgAAAAAAAAAAIAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Data\Models\JobOffer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Data.Models.PageElement" Collapsed="true">
+    <Position X="9.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAABAAAAQBAAAAAAAAAAAAAAAAABAAQAAAQAAAAA=</HashCode>
+      <FileName>Data\Models\PageElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Data.Models.Post" Collapsed="true">
+    <Position X="9.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAEAACAAAAAAACAAAAAAAAAAAAQACAAA=</HashCode>
+      <FileName>Data\Models\Post.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Employee" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Helpers.DataHelper" Collapsed="true">
+    <Position X="17.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Helpers\DataHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.Initial" Collapsed="true">
+    <Position X="19.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241119173213_Initial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.Posts" Collapsed="true">
+    <Position X="23" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241215193432_Posts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.CustomPage" Collapsed="true">
+    <Position X="21.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241215194029_CusotmPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.CustomPages" Collapsed="true">
+    <Position X="23" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241215194116_CustomPages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.Group" Collapsed="true">
+    <Position X="23" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241215195714_Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.PageChildren" Collapsed="true">
+    <Position X="19.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241215200058_PageChildren.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.Cleaning_AddForms" Collapsed="true">
+    <Position X="19.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241222154437_Cleaning_AddForms.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.smallfixes" Collapsed="true">
+    <Position X="21.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20241229205344_small-fixes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.EmployeeImageExpertise" Collapsed="true">
+    <Position X="19.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20250105182240_EmployeeImageExpertise.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.PostTitle" Collapsed="true">
+    <Position X="21.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20250109183325_PostTitle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.Admin" Collapsed="true">
+    <Position X="17.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20250109211952_Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.Employee" Collapsed="true">
+    <Position X="23" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20250109230901_Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.DefaultPage" Collapsed="true">
+    <Position X="21.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20250122163235_DefaultPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Migrations.ApplicationDbContextModelSnapshot" Collapsed="true">
+    <Position X="17.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Migrations\ApplicationDbContextModelSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.ErrorModel" Collapsed="true">
+    <Position X="16" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAIAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Pages\Error.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.PrivacyModel" Collapsed="true">
+    <Position X="16" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Pages\Privacy.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.CustomPages.CreateModel" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAECAgAAAA=</HashCode>
+      <FileName>Pages\Admin\CustomPages\Create.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="CustomPage" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="GroupPages" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.CustomPages.DeleteModel" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAEAAgAAAA=</HashCode>
+      <FileName>Pages\Admin\CustomPages\Delete.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="CustomPage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.CustomPages.DetailsModel" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Pages\Admin\CustomPages\Details.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="CustomPage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.CustomPages.EditModel" Collapsed="true">
+    <Position X="10.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAAAAAAABAAgAAAAAAAAAAAAAAAAAAAEAAgAAAA=</HashCode>
+      <FileName>Pages\Admin\CustomPages\Edit.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="CustomPage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.CustomPages.IndexModel" Collapsed="true">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAQAAABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\CustomPages\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ParentlessPages" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Employees.CreateModel" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAAAAAAAAAACAAAAAACAAQEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Employees\Create.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Employee" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Employees.DeleteModel" Collapsed="true">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Employees\Delete.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Employee" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Employees.DetailsModel" Collapsed="true">
+    <Position X="3.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Employees\Details.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Employee" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Employees.EditModel" Collapsed="true">
+    <Position X="12" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACCAAAAACAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Employees\Edit.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Employee" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Employees.IndexModel" Collapsed="true">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Employees\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Employee" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Forms.DeleteModel" Collapsed="true">
+    <Position X="3.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAEAAEAAAA=</HashCode>
+      <FileName>Pages\Admin\Forms\Delete.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Forms.DetailsModel" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Pages\Admin\Forms\Details.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Form" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Forms.EditModel" Collapsed="true">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAABAAAAAAAEAAEAAAA=</HashCode>
+      <FileName>Pages\Admin\Forms\Edit.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Forms.IndexModel" Collapsed="true">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Pages\Admin\Forms\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.JobOffers.CreateModel" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAgABAAAAAAAAAAAAAAAAAAAAAQEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\JobOffers\Create.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="JobOffer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.JobOffers.DeleteModel" Collapsed="true">
+    <Position X="6.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAgABAAgAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\JobOffers\Delete.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="JobOffer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.JobOffers.DetailsModel" Collapsed="true">
+    <Position X="6.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAgABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\JobOffers\Details.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="JobOffer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.JobOffers.EditModel" Collapsed="true">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAgABAAgAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\JobOffers\Edit.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="JobOffer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.JobOffers.IndexModel" Collapsed="true">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAgABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\JobOffers\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="JobOffer" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.PageElements.CreateModel" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgACAAAAABAAAAAAAAAAAAAAAAAAAAAQEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\PageElements\Create.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="PageElement" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.PageElements.DeleteModel" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\PageElements\Delete.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="PageElement" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.PageElements.DetailsModel" Collapsed="true">
+    <Position X="1.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\PageElements\Details.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="PageElement" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.PageElements.EditModel" Collapsed="true">
+    <Position X="1.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAABACgAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\PageElements\Edit.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="PageElement" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.PageElements.ElementsListPerPageModel" Collapsed="true">
+    <Position X="10.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACgAABAAAABAAgAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\PageElements\ElementsListPerPage.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="PageElements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.PageElements.IndexModel" Collapsed="true">
+    <Position X="1.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\PageElements\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Posts.CreateModel" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAAAAAAAAAACAAAAAAAAAQEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Posts\Create.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Post" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Posts.DeleteModel" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Posts\Delete.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Post" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Posts.DetailsModel" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Posts\Details.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Post" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Posts.EditModel" Collapsed="true">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACAIAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Posts\Edit.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+      <Property Name="Post" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Posts.IndexModel" Collapsed="true">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Posts\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Posts.DetailsModelFront" Collapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAgAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Customer\Posts\Details.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+      <Property Name="Post" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.Posts.IndexModelFront" Collapsed="true">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAgAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Customer\Posts\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Admin.AdminIndexModel" Collapsed="true">
+    <Position X="16" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAAgAAAAAAAAAAAAAAECAAAUAAAAAAA=</HashCode>
+      <FileName>Pages\Admin\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_accountService" />
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Customer.Forms.CreateModel" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQEAAEAAAA=</HashCode>
+      <FileName>Pages\Customer\Forms\Create.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Pages.Customer.DynamicPageModel" Collapsed="true">
+    <Position X="17.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAgAAABAAgAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Pages\Customer\DynamicPage.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+      <Property Name="PageData" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="PageElements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LawFirmCMS.Services.AccountService" Collapsed="true">
+    <Position X="21.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACQBgABIARAgACAEIAAAAUAAAAAAASBgAAAAA=</HashCode>
+      <FileName>Services\AccountService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

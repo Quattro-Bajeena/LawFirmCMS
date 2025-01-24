@@ -33,7 +33,8 @@
         {
             <tr>
                 <td>
-                    @if(item.IsGroup){
+                    @if (item.IsGroup)
+                    {
                         <i class="bi bi-dot"></i>
                     }
                     @Html.DisplayFor(modelItem => item.Title)
@@ -47,29 +48,37 @@
                 <td class="d-flex justify-content-end gap-1">
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> <div class="vr"></div>
                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> <div class="vr"></div>
-                    @if(item.IsGroup && item.Children.Where(child => !child.IsDeleted).Count() > 0){
+                    @if (item.IsGroup && item.Children.Where(child => !child.IsDeleted).Count() > 0)
+                    {
                         <a class="btn-link disabled">Hide</a>
                         <div class="vr"></div>
                     }
-                    else{
+                    else
+                    {
                         <a asp-page="./Delete" asp-route-id="@item.Id">Hide</a>
                         <div class="vr"></div>
-                    } 
-                    @if(item.IsGroup){
+                    }
+                    @if (item.IsGroup)
+                    {
                         <a class="btn-link disabled">Edit Layout</a>
                     }
-                    else{
+                    else
+                    {
                         <a asp-page="/Admin/PageElements/ElementsListPerPage" asp-route-id="@item.Id">Edit Layout</a>
                     }
                 </td>
             </tr>
-            foreach(var child in item.Children){
+            foreach (var child in item.Children)
+            {
                 <tr>
                     <td class="ps-3">
                         <i class="bi bi-dash"></i> @Html.DisplayFor(modelItem => child.Title)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => child.Path)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => child.IsDeleted)
                     </td>
                     <td class="d-flex justify-content-end gap-1">
                         <a asp-page="./Edit" asp-route-id="@child.Id">Edit</a> <div class="vr"></div>
@@ -78,7 +87,55 @@
                         <a asp-page="/Admin/PageElements/ElementsListPerPage" asp-route-id="@child.Id">Edit Layout</a>
                     </td>
                 </tr>
-            }     
+            }
         }
     </tbody>
 </table>
+<hr />
+<h2>Publications</h2>
+<div class="row">
+    <form method="post">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="PostVisibleValue" /> Visible
+            </label>
+            <button asp-page-handler="SavePostVisible" class="btn btn-primary ms-2">Save</button>
+        </div>
+    </form>
+</div>
+<hr />
+<h2>Footer</h2>
+<div class="row">
+    <form method="post">
+        <div class="form-group">
+            <textarea id="Footer_TextArea" asp-for="FooterValue" class="form-control"></textarea>
+        </div>
+        <div class="form-group mt-2">
+            <button asp-page-handler="SaveFooter" class="btn btn-primary">Save footer</button>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/4.22.0/standard/ckeditor.js"></script>
+    <script>
+            CKEDITOR.replace('Footer_TextArea', {
+            versionCheck: false,
+            height: 150,
+            toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+                { name: 'insert', items: ['Image', 'Table'] },
+                { name: 'tools', items: ['Maximize'] },
+                { name: 'styles', items: ['Format', 'FontSize'] }
+            ]
+
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
