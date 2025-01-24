@@ -42,6 +42,7 @@ function showProperInputs(selectedValue) {
         textGroup.style.display = 'none';
         binaryGroup.style.display = 'block';
         employeeGroup.style.display = 'none';
+        jobOfferGroup.style.display = 'none';
         headingGroup.style.display = 'none';
         textDataHeading.disabled = true;
         textDataText.disabled = true;

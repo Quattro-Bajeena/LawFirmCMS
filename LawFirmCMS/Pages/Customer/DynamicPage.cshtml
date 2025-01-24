@@ -23,7 +23,7 @@
                     break;
 
                 case LawFirmCMS.Data.Enums.PageElementType.RichText:
-                    <div class="element-richtext text-center h-100 w-100 m-3">@Html.Raw(element.TextData)</div>
+                    <div class="element-richtext h-100 w-100 m-3">@Html.Raw(element.TextData)</div>
                     break;
 
                 case LawFirmCMS.Data.Enums.PageElementType.Employee:
@@ -34,13 +34,13 @@
                         {
                             var mimeType = employee.GetMimeType();
                             Console.WriteLine("Hello this is my picture!" + employee.Picture);
-                            <div class="element-employee-image-wrapper">
-                                <img class="card-img-left element-employee-image" src="data:@mimeType;base64,@Convert.ToBase64String(employee.Picture)" alt="Image" />
+                            <div class="element-employee-image-wrapper" style="max-width: 250px">
+                                <img class="card-img-left element-employee-image w-100"  src="data:@mimeType;base64,@Convert.ToBase64String(employee.Picture)" alt="Image" />
                             </div>
                         }
                         <div class="card-body text-start">
                             <h5 class="card-title">@employee.Name @employee.Surname</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@employee.Login</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Lawyer</h6>
                             <p class="card-text">@employee.Expertise</p>
                         </div>
                     </div>
