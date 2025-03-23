@@ -4,6 +4,8 @@ Autorzy: Mateusz Oleszek i Patrycja Przybylska
 
 ## Uruchomienie
 
+Można uruchomić aplikację za pomocą docker compose. Plik `docker-compose.yml` znajduje się w folderze `Docker`
+
 ## Testowanie panelu administratora
 
 Tylko zalogowani użytkownicy są w stanie wejść do panelu tworzenia strony. Do testowania tej części aplikacji można użyć jednego z istniejących kont. 
