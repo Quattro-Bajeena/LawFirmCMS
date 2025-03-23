@@ -32,14 +32,18 @@ namespace LawFirmCMS.Data.Models
         public string GetMimeType()
         {
             var mimeType = "application/octet-stream";
-            if (BinaryData[0] == 0xFF && BinaryData[1] == 0xD8)
-                mimeType = "image/jpeg";
-            if (BinaryData[0] == 0x89 && BinaryData[1] == 0x50)
-                mimeType = "image/png";
-            if (BinaryData[0] == 0x47 && BinaryData[1] == 0x49)
-                mimeType = "image/gif";
-            if (BinaryData[0] == 0x42 && BinaryData[1] == 0x4D)
-                mimeType = "image/bmp";
+            if (BinaryData != null)
+            {
+                if (BinaryData[0] == 0xFF && BinaryData[1] == 0xD8)
+                    mimeType = "image/jpeg";
+                if (BinaryData[0] == 0x89 && BinaryData[1] == 0x50)
+                    mimeType = "image/png";
+                if (BinaryData[0] == 0x47 && BinaryData[1] == 0x49)
+                    mimeType = "image/gif";
+                if (BinaryData[0] == 0x42 && BinaryData[1] == 0x4D)
+                    mimeType = "image/bmp";
+            }
+
             return mimeType;
         }
 

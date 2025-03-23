@@ -48,12 +48,24 @@
                     break;
 
                 case LawFirmCMS.Data.Enums.PageElementType.ScreenWideImage:
-                    <section class="hero text-white text-center h-100 w-100 p-5 m-0"
-                    style="background: url('data:image/jpeg;base64,@Convert.ToBase64String(element.BinaryData)') no-repeat center center; background-size: cover;">
-                        <div class="container p-5">
-                            <h1 class="display-4">@Html.Raw(element.TextData)</h1>
-                        </div>
-                    </section>
+                    @if(element.BinaryData != null)
+                    {
+                        <section class="hero text-white text-center h-100 w-100 p-5 m-0"
+                                 style="background: url('data:image/jpeg;base64,@Convert.ToBase64String(element.BinaryData)') no-repeat center center; background-size: cover;">
+                            <div class="container p-5">
+                                <h1 class="display-4">@Html.Raw(element.TextData)</h1>
+                            </div>
+                        </section>
+                    }
+                    else
+                    {
+                        <section class="hero text-white text-center h-100 w-100 p-5 m-0"
+                                 style="background-size: cover;">
+                            <div class="container p-5">
+                                <h1 class="display-4">@Html.Raw(element.TextData)</h1>
+                            </div>
+                        </section>
+                    }
                     break;
 
                 case LawFirmCMS.Data.Enums.PageElementType.JobOffer:
