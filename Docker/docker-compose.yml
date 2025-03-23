@@ -2,6 +2,16 @@ volumes:
   sqlserver_data:
   
 services:
+
+  lawfirmcms:
+    image: paraon/lawfirmcms:latest
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=Server=localhost,1433;Database=LawFirmCMS;Trusted_Connection=False;TrustServerCertificate=True;MultipleActiveResultSets=true;User Id=sa;Password=password123sdJwnwlk@;
+    ports:
+      - 8080:8080
+      - 8081:8081
+    restart: always
+
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
