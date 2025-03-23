@@ -9,7 +9,7 @@
     <EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
     <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0</ContainerBaseImage>
     <UserSecretsId>ec5a30c1-ddeb-4332-857a-a77f29be49e4</UserSecretsId>
-    <ContainerRepository>law-firm-cms</ContainerRepository>
+    <ContainerRepository>paraon/law-firm-cms</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>
